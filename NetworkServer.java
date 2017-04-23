@@ -1,10 +1,11 @@
 import java.util.*;
 import java.io.*;
+import java.net.*;
 public class NetworkServer {
 	//送受信されたデータを保存するディレクトリを設定するクラス変数
-	private static String send_data_dir = "send_data/";
-	private static String input_data_dir = "input_data/";
-	private static String get_data_dir = "get_data/";
+	private static String zipDataDir = "zip_data/";//圧縮したデータを保存しておくディレクトリ
+	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
+	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
 	public NetworkServer(String address, String[] addressies){
 		String myaddress = address;
@@ -14,11 +15,11 @@ public class NetworkServer {
 	/*zipに圧縮するメソッド。今はファイルしか引数に持ってないけど、
 	もしかしたら圧縮後のファイル名も引数でも足した方がいいかも
 	（もしかしたらディレクトリごと送信できるようにするかもしれないから）*/
-	public static File zip(File file) throws Exception {
+	private File zip(File file) throws Exception {
 		String filename[] = {file.getName()};
-		String zip_file_name = filename[0] + ".zip";
-		String send_path = send_data_dir+zip_file_name;
-		return ZipClient.compressZip(input_data_dir, filename, send_path);
+		String zipFilename = filename[0] + ".zip";
+		String zipPath = zipDataDir+zipFilename;
+		return ZipClient.compressZip(rowDataDir, filename, zipPath);
 	}
 
 	//zipを解凍するメソッドディレクトリを受け取った時を考えて戻り値をファイルの配列にしてある
@@ -26,34 +27,73 @@ public class NetworkServer {
 		String filename = file.getName();
 		return ZipClient.decompressZip(send_data_dir+filename, get_data_dir);
 	}*/
+
 	//とりあえずファイル一つだけしか圧縮しないことにする
-	public static File unzip(File file) throws Exception {
+	private File unzip(File file) throws Exception {
 		String filename = file.getName();
-		return ZipClient.decompressZip(send_data_dir+filename, get_data_dir)[0];
+		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir)[0];
 	}
 /*
-public void send(File file, String filename) {
-		//文字列を送信するメソッド
-	return;
+public void sendName(String data) {
+	//ファイル名を送信するメソッド
 }
 
-public File get(){
-		//文字列を受信するメソッド
+public String getName(){
+		//ファイル名を受信するメソッド
 }
+
 */
+public void sendData(File sendFile, int port,String host) throws Exception {
+		File file = zip(sendFile); // 送信するファイルのオブジェクト
+			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
+			try(
+			// ソケットの準備
+				Socket socket = new Socket(host, port);
 
-//テスト用のメインメソッド
+			// ストリームの準備
+				InputStream  inputStream  = new FileInputStream(file);
+				OutputStream outputStream = socket.getOutputStream();
 
-public static void main(String[] args) throws Exception {
+				){
+				int fileLength;
+				while ((fileLength = inputStream.read(buffer)) > 0) {
+					outputStream.write(buffer, 0, fileLength);
+				}
 
-	File file = new File("input_data/hoge.in");
-	System.out.println(file.getAbsolutePath());
+			// 終了処理
+				outputStream.flush();
+				outputStream.close();
+				inputStream.close();
+				socket.close();
+			}
+		}
 
-	File zipfile = NetworkServer.zip(file);
-	System.out.println(zipfile.getAbsolutePath());
+		public File getData(String filename, int port) throws Exception {
+		String filepath = zipDataDir+filename+".zip";       // 受信したファイルの保存先
+		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
+		try(
+			// ソケットの準備
+			ServerSocket serverSocket = new ServerSocket(port);
+			Socket       socket       = serverSocket.accept();
 
-	File unzipfile = NetworkServer.unzip(zipfile);
-	System.out.println(unzipfile.getAbsolutePath());
-}
+			// ストリームの準備
+			InputStream  inputStream  = socket.getInputStream();
+			OutputStream outputStream = new FileOutputStream(filepath);
+			){
 
+			// ファイルをストリームで受信
+			int fileLength;
+			while ((fileLength = inputStream.read(buffer)) > 0) {
+				outputStream.write(buffer, 0, fileLength);
+			}
+
+			// 終了処理
+			outputStream.flush();
+			outputStream.close();
+			inputStream.close();
+			socket.close();
+			serverSocket.close();
+			return unzip(new File(filepath));
+		}
+	}
 }
