@@ -1,4 +1,3 @@
-package software;
 import java.util.*;
 import java.io.*;
 public class NetworkServer {
@@ -44,17 +43,17 @@ public File get(){
 */
 
 //テスト用のメインメソッド
-/*
+
 public static void main(String[] args) throws Exception {
 
-	File file = new File("input_data/hoge.txt");
+	File file = new File("input_data/hoge.in");
 	System.out.println(file.getAbsolutePath());
 
 	File zipfile = NetworkServer.zip(file);
 	System.out.println(zipfile.getAbsolutePath());
 
-	File unzipfile = NetworkServer.unzip(zipfile)[0];
+	File unzipfile = NetworkServer.unzip(zipfile);
 	System.out.println(unzipfile.getAbsolutePath());
- }
- */
+}
+
 }

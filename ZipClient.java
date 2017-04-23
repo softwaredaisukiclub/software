@@ -1,4 +1,3 @@
-package software;
 import java.util.zip.*;
 import java.util.*;
 import java.io.*;
@@ -11,8 +10,9 @@ public final class ZipClient {
 		try(
 			FileOutputStream     out     = new FileOutputStream(outputFile);
 			BufferedOutputStream bos     = new BufferedOutputStream(out);
-			ZipOutputStream      archive = new ZipOutputStream(out); 
+			ZipOutputStream      archive = new ZipOutputStream(out);
 			){
+			archive.setLevel(9);//圧縮レベルの設定
 			for( String fileName : inputFiles ) {
 				ZipEntry entry   = new ZipEntry(fileName);
 				archive.putNextEntry( entry );
@@ -50,7 +50,7 @@ public final class ZipClient {
 					continue;
 				}
 				if( !file.getParentFile().exists() ){ file.getParentFile().mkdirs(); }
-				try(   
+				try(
 					FileOutputStream fos = new FileOutputStream( file );
 					BufferedOutputStream bos = new BufferedOutputStream( fos ); 
 					){
