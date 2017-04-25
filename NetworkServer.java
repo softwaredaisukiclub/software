@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 public class NetworkServer {
 	//送受信されたデータを保存するディレクトリを設定するクラス変数
+	public static final int PORT = 8000;
 	private static String zipDataDir = "zip_data/";//圧縮したデータを保存しておくディレクトリ
 	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
 	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
@@ -34,21 +35,21 @@ public class NetworkServer {
 		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir)[0];
 	}
 /*
-public void sendName(String data) {
+public void sendString(String data, String host) {
 	//ファイル名を送信するメソッド
 }
 
-public String getName(){
+public String getString() {
 		//ファイル名を受信するメソッド
 }
 
 */
-public void sendData(File sendFile, int port,String host) throws Exception {
+public void sendData(File sendFile,String host) throws Exception {
 		File file = zip(sendFile); // 送信するファイルのオブジェクト
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
 			try(
 			// ソケットの準備
-				Socket socket = new Socket(host, port);
+				Socket socket = new Socket(host, PORT);
 
 			// ストリームの準備
 				InputStream  inputStream  = new FileInputStream(file);
@@ -68,12 +69,12 @@ public void sendData(File sendFile, int port,String host) throws Exception {
 			}
 		}
 
-		public File getData(String filename, int port) throws Exception {
+		public File getData(String filename) throws Exception {
 		String filepath = zipDataDir+filename+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
 		try(
 			// ソケットの準備
-			ServerSocket serverSocket = new ServerSocket(port);
+			ServerSocket serverSocket = new ServerSocket(PORT);
 			Socket       socket       = serverSocket.accept();
 
 			// ストリームの準備

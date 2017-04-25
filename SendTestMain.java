@@ -8,7 +8,7 @@ class SendTestMain {
 		String myaddress = "hoge";
 		String addressies[] = {"hoge"};
 		NetworkServer net = new NetworkServer(myaddress,addressies);
-		net.sendData(file, 8000, "localhost");
+		net.sendData(file, "localhost");
 		System.out.println("ended");
 	}
 }
