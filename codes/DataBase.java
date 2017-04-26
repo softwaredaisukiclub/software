@@ -1,6 +1,6 @@
-class DataBase {
+public class DataBase {
+	public ArrayList<File> files = new ArrayList<File>();
 	public DataBase(){
-		public ArrayList<File> files = new ArrayList<File>();
 	}
 
 	public File find(String filename) {

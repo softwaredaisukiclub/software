@@ -36,7 +36,7 @@ public final class ZipClient {
 		return new File(outputFile);
 	}
 //ファイルを解凍するメソッド
-	public static File[] decompressZip( String inputFile , String outputDir ) throws Exception {
+	public static ArrayList<File> decompressZip( String inputFile , String outputDir ) throws Exception {
 		ArrayList<File> files = new ArrayList<File>();
 		try(   
 			FileInputStream fis = new FileInputStream(inputFile);
@@ -63,7 +63,6 @@ public final class ZipClient {
 				}
 			}
 		}
-		return (File[])files.toArray(new File[0]);
+		return files;
 	}
-
 }

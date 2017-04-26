@@ -1,39 +1,80 @@
-class Client extends NetworkServer implements Runnable {
-	public Client(String addres, String[] addressies) {
+import java.util.*;
+import java.io.*;
+import java.net.*;
+public class Client extends NetworkServer implements Runnable {
+	private String filename;
+	private String query;
+	private String result;
+	private ArrayList<File> files;
+
+	public Client(String address, String[] myaddress) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
-		super(address,addressies);
+		super(address,myaddress);
 	}
 
 	public void run() {
-		getData();
+		switch(query) {
+			case "find":
+			files =	getData(filename);
+			break;
+			case "delete":
+			result = getString();
+			break;
+			case "store":
+			result = getString();
+			break;
+		}
 	}
 
-	public File[] find(String filename) {
-		//この部分にマルチスレッドで受け取りのサーバを展開(getData(filename))
-		for( String address : myaddress) {
-			sendString('find', address);
+	public ArrayList<File> find(String name) {
+		files.clear();
+		ArrayList<Thread> threads = new ArrayList<Thread>();
+		filename = name;
+		Thread nowthread;
+		query = "find";
+		for(String address : myaddress) {
+			nowthread = new Thread(this);
+			threads.add(thread);
+			thread.start();
+			sendString("find", address);
 			sendString(filename, address);
 		}
-		//return 受け取った複数のファイル 
+		for(Thread thread : threads) {
+			thead.join();
+		}
+		return files;
 	}
 
-	public boolean delete(String filename) {
-		//この部分にマルチスレッドで受け取りのサーバを展開(getData(filename))
-		for( String address : myaddress) {
-			sendString('delete', address);
-			sendString(filename, address);
+	public boolean delete(String name) {
+		ArrayList<Thread> threads = new ArrayList<Thread>();
+		query = "delete";
+		for(String address : myaddress) {
+			Thread thread = new Thread(this);
+			threads.add(thread);
+			thread.start();
+			sendString("delete", address);
+			sendString(name, address);
 		}
-		//return 削除が成功したかどうか
+		for(Thread thread : threads) {
+			thead.join();
+		}
+		return result.equals("success");
 	}
 
 	public boolean store(File file) {
-		//この部分にマルチスレッドで受け取りのサーバーを展開(getData(file.getName()))
-		for( String address : myaddress) {
-		sendString('store', address);
-		sendString(file.getName(), address);
-		sendData(file, address);
-	}
-		//return 保存が成功したかどうか
+		ArrayList<Thread> threads = new ArrayList<Thread>();
+		query = "store";
+		for(String address : myaddress) {
+			Thread thread = new Thread(this);
+			threads.add(thread);
+			thread.start();
+			sendString("store", address);
+			sendString(filename, address);
+		}
+		for(Thread thread : threads) {
+			thead.join();
+		}
+		return result.equals("success");
 	}
 }

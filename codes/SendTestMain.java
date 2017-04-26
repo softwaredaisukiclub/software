@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-class SendTestMain {
+public class SendTestMain {
 	//送信テスト用のメインメソッド
 	public static void main(String[] args) throws Exception {
 		File file = new File("row_data/"+"hoge.in");

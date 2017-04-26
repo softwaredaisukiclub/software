@@ -8,10 +8,9 @@ public class NetworkServer {
 	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
 	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
-	public NetworkServer(String address, String[] addressies) throws Exception {
+	public NetworkServer(String address, String[] addresses) {
 		String myaddress = address;
-		String[] myaddressies = addressies;
-
+		String[] myaddresses = addresses;
 	}
 
 	//圧縮系の細かいメソッドは長いからZipClientに分割しました。
@@ -31,10 +30,9 @@ public class NetworkServer {
 		return ZipClient.decompressZip(send_data_dir+filename, get_data_dir);
 	}*/
 
-	//とりあえずファイル一つだけしか圧縮しないことにする
-	private File unzip(File file) throws Exception {
+	private ArrayList<File> unzip(File file) throws Exception {
 		String filename = file.getName();
-		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir)[0];
+		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir);
 	}
 /*
 public void sendString(String data, String host) {
@@ -46,57 +44,57 @@ public String getString() {
 }
 
 */
-public void sendData(File sendFile,String host) throws Exception {
-		File file = zip(sendFile); // 送信するファイルのオブジェクト
+public void sendData(File sendFile,String host) {
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
-			try(
+			try{
+				File file = zip(sendFile); // 送信するファイルのオブジェクト
 			// ソケットの準備
-				Socket sendSocket = new Socket(host, PORT);
-
+				Socket socket = new Socket(host, PORT);
 			// ストリームの準備
 				InputStream  inputStream  = new FileInputStream(file);
 				OutputStream outputStream = socket.getOutputStream();
-
-				){
+				
 				int fileLength;
 				while ((fileLength = inputStream.read(buffer)) > 0) {
 					outputStream.write(buffer, 0, fileLength);
 				}
-
-			// 終了処理
+				// 終了処理
 				outputStream.flush();
 				outputStream.close();
 				inputStream.close();
 				socket.close();
+			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 
-		public File getData(String filename) throws Exception {
+		public ArrayList<File> getData(String filename) {
 		String filepath = zipDataDir+filename+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
-		try(
+		ArrayList<File> data = new ArrayList<File>();
+		try{
 			// ソケットの準備
 			ServerSocket serverSocket = new ServerSocket(PORT);
 			Socket       socket       = serverSocket.accept();
-
 			// ストリームの準備
 			InputStream  inputStream  = socket.getInputStream();
 			OutputStream outputStream = new FileOutputStream(filepath);
-			){
-
 			// ファイルをストリームで受信
 			int fileLength;
 			while ((fileLength = inputStream.read(buffer)) > 0) {
 				outputStream.write(buffer, 0, fileLength);
 			}
-
 			// 終了処理
 			outputStream.flush();
 			outputStream.close();
 			inputStream.close();
 			socket.close();
 			serverSocket.close();
-			return unzip(new File(filepath));
+			data = unzip(new File(filepath));
+			return data;
+		}catch(Exception e){
+		 e.printStackTrace();
+		 return data;
 		}
 	}
 }
