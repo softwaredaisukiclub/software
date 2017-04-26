@@ -17,11 +17,10 @@ public class NetworkServer {
 	/*zipに圧縮するメソッド。今はファイルしか引数に持ってないけど、
 	もしかしたら圧縮後のファイル名も引数でも足した方がいいかも
 	（もしかしたらディレクトリごと送信できるようにするかもしれないから）*/
-	private File zip(File file) throws Exception {
-		String filename[] = {file.getName()};
-		String zipFilename = filename[0] + ".zip";
+	private File zip(File[] files) throws Exception {
+		String zipFilename ="data.zip";
 		String zipPath = zipDataDir+zipFilename;
-		return ZipClient.compressZip(rowDataDir, filename, zipPath);
+		return ZipClient.compressZip(rowDataDir, files, zipPath);
 	}
 
 	//zipを解凍するメソッドディレクトリを受け取った時を考えて戻り値をファイルの配列にしてある
@@ -44,10 +43,10 @@ public String getString() {
 }
 
 */
-public void sendData(File sendFile,String host) {
+public void sendData(File[] sendFiles,String host) {
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
 			try{
-				File file = zip(sendFile); // 送信するファイルのオブジェクト
+				File file = zip(sendFiles); // 送信するファイルのオブジェクト
 			// ソケットの準備
 				Socket socket = new Socket(host, PORT);
 			// ストリームの準備

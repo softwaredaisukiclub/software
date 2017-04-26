@@ -7,12 +7,11 @@ public class Client extends NetworkServer implements Runnable {
 	private String result;
 	private ArrayList<File> files;
 
-	public Client(String address, String[] myaddress) {
+	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
-		super(address,myaddress);
+		super(address,addresses);
 	}
-
 	public void run() {
 		switch(query) {
 			case "find":
@@ -33,10 +32,10 @@ public class Client extends NetworkServer implements Runnable {
 		filename = name;
 		Thread nowthread;
 		query = "find";
-		for(String address : myaddress) {
+		for(String address : myaddresses) {
 			nowthread = new Thread(this);
-			threads.add(thread);
-			thread.start();
+			threads.add(nowthread);
+			nowthread.start();
 			sendString("find", address);
 			sendString(filename, address);
 		}
@@ -49,7 +48,7 @@ public class Client extends NetworkServer implements Runnable {
 	public boolean delete(String name) {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "delete";
-		for(String address : myaddress) {
+		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
 			thread.start();
@@ -65,7 +64,7 @@ public class Client extends NetworkServer implements Runnable {
 	public boolean store(File file) {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "store";
-		for(String address : myaddress) {
+		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
 			thread.start();

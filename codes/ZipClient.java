@@ -2,24 +2,23 @@ import java.util.zip.*;
 import java.util.*;
 import java.io.*;
 public final class ZipClient {
-	public static File compressZip( String rootPath, String[] inputFiles , String outputFile ) throws Exception {
+	public static File compressZip( String rootPath, File[] inputFiles , String outputFile ) throws Exception {
     //ファイルを圧縮するメソッド
 		if( rootPath     == null ){ throw new Exception(); }
 		if( inputFiles   == null ){ throw new Exception(); }
 		if( outputFile   == null ){ throw new Exception(); }
+		ArrayList<File> files = new ArrayList<File>();
 		try(
 			FileOutputStream     out     = new FileOutputStream(outputFile);
 			BufferedOutputStream bos     = new BufferedOutputStream(out);
 			ZipOutputStream      archive = new ZipOutputStream(out);
 			){
+			files = allFiles(inputFiles);
 			archive.setLevel(9);//圧縮レベルの設定
-			for( String fileName : inputFiles ) {
+			for( File file : files ) {
+				String fileName = file.getName();
 				ZipEntry entry   = new ZipEntry(fileName);
 				archive.putNextEntry( entry );
-				if( fileName.endsWith("/") ) { 
-					archive.closeEntry();
-					continue;
-				}
 				try(
 					FileInputStream     fis = new FileInputStream(rootPath+fileName);
 					BufferedInputStream bis = new BufferedInputStream(fis);
@@ -64,5 +63,18 @@ public final class ZipClient {
 			}
 		}
 		return files;
+	}
+
+	private static ArrayList<File> allFiles(File[] files) {
+		ArrayList<File> allfiles = new ArrayList<File>();
+		for(File file : files ) {
+			if(file.isDirectory()) {
+				allfiles.addAll(allFiles(file.listFiles()));
+			}
+			else {
+				allfiles.add(file);
+			}
+		}
+		return allfiles;
 	}
 }
