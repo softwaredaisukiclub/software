@@ -21,18 +21,21 @@ public class Client extends NetworkServer implements Runnable {
 	}
 
 	public void run() {
+		String result;
 		switch(query) {
 			case "find":
 			ArrayList<File> getFiles = getData();
-			addFile(getFiles);
+			if(getFiles != null) {
+				addFile(getFiles);
+			}
 			break;
 			case "delete":
-			String getResult = getString();
-			addResult(getResult);
+			result = getString();
+			addResult(result);
 			break;
 			case "store":
-			String getResult = getString();
-			addResult(getResult);
+			result = getString();
+			addResult(result);
 			break;
 		}
 	}
@@ -49,8 +52,11 @@ public class Client extends NetworkServer implements Runnable {
 			sendString("find", address);
 			sendString(filename, address);
 		}
+		for(String address : myaddresses) {
+			sendString(filename, address);
+		}
 		for(Thread thread : threads) {
-			thead.join();
+			thread.join();
 		}
 		return files;
 	}
@@ -64,30 +70,48 @@ public class Client extends NetworkServer implements Runnable {
 			threads.add(thread);
 			thread.start();
 			sendString("delete", address);
+		}
+		for(String address : myaddresses) {
 			sendString(filename, address);
 		}
 		for(Thread thread : threads) {
-			thead.join();
+			thread.join();
 		}
-		return result.indexOf("success") != -1;
+		return results.contains("success");
 	}
-
+	//今はファイル一つづつしか保存できないようにする
 	public boolean store(File file) {
-		results.clear();
+		files.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
-		query = "store";
+		query = "find";
 		String filename = file.getName();
 		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
 			thread.start();
-			sendString("store", address);
+			sendString("find", address);
+		}
+		for(String address : myaddresses) {
 			sendString(filename, address);
 		}
 		for(Thread thread : threads) {
-			thead.join();
+			thread.join();
 		}
-		return result.indexOf("success") != -1;
+		if(files.isEmpty()){
+			query = "store";
+			results.clear();
+			Thread thread = new Thread(this);
+			thread.start();
+			int size = myaddresses.size();
+			String address = myaddresses[new Random().nextInt(size)];//まだ実装をちゃんと考えていない。とりあえすランダムに保存
+			sendString("store", address);
+			File files[] = {file};
+			sendData(files, address);
+			thread.join();
+			return results.contains("success");
+		}else{
+			return false;
+		}
 	}
 }
 

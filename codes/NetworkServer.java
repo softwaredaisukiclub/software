@@ -7,10 +7,12 @@ public class NetworkServer {
 	private static String zipDataDir = "zip_data/";//圧縮したデータを保存しておくディレクトリ
 	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
 	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
+	protected String myaddress;
+	protected String[] myaddresses;
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
 	public NetworkServer(String address, String[] addresses) {
-		String myaddress = address;
-		String[] myaddresses = addresses;
+		 myaddress = address;
+		 myaddresses = addresses;
 	}
 
 	//複数のファイルを引数に持たせると一つのzipファイルになる
