@@ -8,10 +8,12 @@ public class NetworkServer {
 	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
 	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
-	public NetworkServer(String address, String[] addressies){
+	public NetworkServer(String address, String[] addressies) throws Exception {
 		String myaddress = address;
 		String[] myaddressies = addressies;
+
 	}
+
 	//圧縮系の細かいメソッドは長いからZipClientに分割しました。
 	/*zipに圧縮するメソッド。今はファイルしか引数に持ってないけど、
 	もしかしたら圧縮後のファイル名も引数でも足した方がいいかも
@@ -49,7 +51,7 @@ public void sendData(File sendFile,String host) throws Exception {
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
 			try(
 			// ソケットの準備
-				Socket socket = new Socket(host, PORT);
+				Socket sendSocket = new Socket(host, PORT);
 
 			// ストリームの準備
 				InputStream  inputStream  = new FileInputStream(file);

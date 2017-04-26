@@ -1,8 +1,12 @@
-class Client extends NetworkServer {
+class Client extends NetworkServer implements Runnable {
 	public Client(String addres, String[] addressies) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
 		super(address,addressies);
+	}
+
+	public void run() {
+		getData();
 	}
 
 	public File[] find(String filename) {
