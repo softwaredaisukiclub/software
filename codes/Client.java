@@ -2,34 +2,44 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 public class Client extends NetworkServer implements Runnable {
-	private String filename;
 	private String query;
-	private String result;
-	private ArrayList<File> files;
+	private ArrayList<String> results = new ArrayList<String>();
+	private ArrayList<File> files = new ArrayList<File>();
 
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
 		super(address,addresses);
 	}
+
+	public synchronized void addFile(ArrayList<File> getFiles) {
+		files.addAll(getFiles);
+	}
+
+	public synchronized void addResult(String getResult) {
+		results.add(getResult);
+	}
+
 	public void run() {
 		switch(query) {
 			case "find":
-			files =	getData(filename);
+			ArrayList<File> getFiles = getData();
+			addFile(getFiles);
 			break;
 			case "delete":
-			result = getString();
+			String getResult = getString();
+			addResult(getResult);
 			break;
 			case "store":
-			result = getString();
+			String getResult = getString();
+			addResult(getResult);
 			break;
 		}
 	}
 
-	public ArrayList<File> find(String name) {
+	public ArrayList<File> find(String filename) {
 		files.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
-		filename = name;
 		Thread nowthread;
 		query = "find";
 		for(String address : myaddresses) {
@@ -45,7 +55,8 @@ public class Client extends NetworkServer implements Runnable {
 		return files;
 	}
 
-	public boolean delete(String name) {
+	public boolean delete(String filename) {
+		results.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "delete";
 		for(String address : myaddresses) {
@@ -53,17 +64,19 @@ public class Client extends NetworkServer implements Runnable {
 			threads.add(thread);
 			thread.start();
 			sendString("delete", address);
-			sendString(name, address);
+			sendString(filename, address);
 		}
 		for(Thread thread : threads) {
 			thead.join();
 		}
-		return result.equals("success");
+		return result.indexOf("success") != -1;
 	}
 
 	public boolean store(File file) {
+		results.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "store";
+		String filename = file.getName();
 		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
@@ -74,6 +87,8 @@ public class Client extends NetworkServer implements Runnable {
 		for(Thread thread : threads) {
 			thead.join();
 		}
-		return result.equals("success");
+		return result.indexOf("success") != -1;
 	}
 }
+
+

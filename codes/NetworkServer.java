@@ -13,22 +13,15 @@ public class NetworkServer {
 		String[] myaddresses = addresses;
 	}
 
-	//圧縮系の細かいメソッドは長いからZipClientに分割しました。
-	/*zipに圧縮するメソッド。今はファイルしか引数に持ってないけど、
-	もしかしたら圧縮後のファイル名も引数でも足した方がいいかも
-	（もしかしたらディレクトリごと送信できるようにするかもしれないから）*/
+	//複数のファイルを引数に持たせると一つのzipファイルになる
 	private File zip(File[] files) throws Exception {
 		String zipFilename ="data.zip";
 		String zipPath = zipDataDir+zipFilename;
 		return ZipClient.compressZip(rowDataDir, files, zipPath);
 	}
 
-	//zipを解凍するメソッドディレクトリを受け取った時を考えて戻り値をファイルの配列にしてある
-	/*public static File[] unzip(File file) throws Exception {
-		String filename = file.getName();
-		return ZipClient.decompressZip(send_data_dir+filename, get_data_dir);
-	}*/
 
+	//解凍時に複数のファイルになることがあるのでリストで返すようにした
 	private ArrayList<File> unzip(File file) throws Exception {
 		String filename = file.getName();
 		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir);
@@ -62,13 +55,14 @@ public void sendData(File[] sendFiles,String host) {
 				outputStream.close();
 				inputStream.close();
 				socket.close();
+				file.delete();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 		}
 
-		public ArrayList<File> getData(String filename) {
-		String filepath = zipDataDir+filename+".zip";       // 受信したファイルの保存先
+		public ArrayList<File> getData() {
+		String filepath = zipDataDir+UUID.randomUUID()+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
 		ArrayList<File> data = new ArrayList<File>();
 		try{
@@ -89,11 +83,13 @@ public void sendData(File[] sendFiles,String host) {
 			inputStream.close();
 			socket.close();
 			serverSocket.close();
-			data = unzip(new File(filepath));
+			File getData = new File(filepath);
+			data = unzip(getData);
+			getData.delete();
 			return data;
 		}catch(Exception e){
-		 e.printStackTrace();
-		 return data;
+			e.printStackTrace();
+			return data;
 		}
 	}
 }
