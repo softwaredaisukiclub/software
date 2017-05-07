@@ -97,7 +97,7 @@ public class Client extends NetworkServer implements Runnable {
 		for(Thread thread : threads) {
 			thread.join();
 		}
-		if(files.isEmpty()){
+		if(files.isEmpty()) {
 			query = "store";
 			results.clear();
 			Thread thread = new Thread(this);

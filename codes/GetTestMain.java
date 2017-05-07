@@ -7,7 +7,9 @@ public class GetTestMain {
 		String myaddress = "hoge";
 		String addressies[] = {"hoge"};
 		NetworkServer net = new NetworkServer(myaddress,addressies);
-		ArrayList<File> file = net.getData();
-		System.out.println(file.get(0).getPath());
+		ArrayList<File> files = net.getData();
+		for(File file:files){
+		System.out.println(file.getPath());
+	}
 	}
 }

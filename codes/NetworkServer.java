@@ -15,6 +15,8 @@ public class NetworkServer {
 		 myaddresses = addresses;
 	}
 
+
+
 	//複数のファイルを引数に持たせると一つのzipファイルになる
 	private File zip(File[] files) throws Exception {
 		String zipFilename ="data.zip";
@@ -47,7 +49,7 @@ public void sendData(File[] sendFiles,String host) {
 			// ストリームの準備
 				InputStream  inputStream  = new FileInputStream(file);
 				OutputStream outputStream = socket.getOutputStream();
-				
+
 				int fileLength;
 				while ((fileLength = inputStream.read(buffer)) > 0) {
 					outputStream.write(buffer, 0, fileLength);
