@@ -1,102 +1,36 @@
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
+import java.security.*;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+class AESClient{
+  private static Key skey = makeKey(128);
 
-public class AESClient {
-
-  private static final String ENCRYPT_KEY = "1234567890123456";
-  private static final String ENCRYPT_IV = "abcdefghijklmnop";
-
-  public static byte[] encrypt(byte[] byteText) {
-    // 変数初期化
-    byte[] byteResult = null;
-    try {
-
-      // 暗号化キーと初期化ベクトルをバイト配列へ変換
-      byte[] byteKey = ENCRYPT_KEY.getBytes("UTF-8");
-      byte[] byteIv = ENCRYPT_IV.getBytes("UTF-8");
-
-      // 暗号化キーと初期化ベクトルのオブジェクト生成
-      SecretKeySpec key = new SecretKeySpec(byteKey, "AES");
-      IvParameterSpec iv = new IvParameterSpec(byteIv);
-
-      // Cipherオブジェクト生成
-      Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-
-      // Cipherオブジェクトの初期化
-      cipher.init(Cipher.ENCRYPT_MODE, key, iv);
-
-      // 暗号化の結果格納
-      byteResult = cipher.doFinal(byteText);
-
-
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
-    } catch (NoSuchPaddingException e) {
-      e.printStackTrace();
-    } catch (InvalidKeyException e) {
-      e.printStackTrace();
-    } catch (IllegalBlockSizeException e) {
-      e.printStackTrace();
-    } catch (BadPaddingException e) {
-      e.printStackTrace();
-    } catch (InvalidAlgorithmParameterException e) {
-      e.printStackTrace();
+  private static Key makeKey(int key_bits) {
+    byte[] key = new byte[key_bits / 8];
+    for (int i = 0; i < key.length; i++) {
+      key[i] = (byte) (i + 1);
     }
-
-    // 暗号化文字列を返却
-    return byteResult;
+    return new SecretKeySpec(key, "AES");
   }
-  public static byte[] decrypt(byte[] byteText) {
-    // 変数初期化
-    String strResult = null;
-    byte[] byteResult = null;
+
+  //暗号化
+  public static byte[] encode(byte[] src) {
     try {
-
-      // 暗号化キーと初期化ベクトルをバイト配列へ変換
-      byte[] byteKey = ENCRYPT_KEY.getBytes("UTF-8");
-      byte[] byteIv = ENCRYPT_IV.getBytes("UTF-8");
-
-      // 復号化キーと初期化ベクトルのオブジェクト生成
-      SecretKeySpec key = new SecretKeySpec(byteKey, "AES");
-      IvParameterSpec iv = new IvParameterSpec(byteIv);
-
-      // Cipherオブジェクト生成
-      Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-
-      // Cipherオブジェクトの初期化
-      cipher.init(Cipher.DECRYPT_MODE, key, iv);
-
-      // 復号化の結果格納
-      byteResult = cipher.doFinal(byteText);
-
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
-    } catch (NoSuchPaddingException e) {
-      e.printStackTrace();
-    } catch (InvalidKeyException e) {
-      e.printStackTrace();
-    } catch (IllegalBlockSizeException e) {
-      e.printStackTrace();
-    } catch (BadPaddingException e) {
-      e.printStackTrace();
-    } catch (InvalidAlgorithmParameterException e) {
-      e.printStackTrace();
+      Cipher cipher = Cipher.getInstance("AES");
+      cipher.init(Cipher.ENCRYPT_MODE, skey);
+      return cipher.doFinal(src);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    // 復号化文字列を返却
-    return byteResult;
+  // 復号
+  public static byte[] decode(byte[] src) {
+    try {
+      Cipher cipher = Cipher.getInstance("AES");
+      cipher.init(Cipher.DECRYPT_MODE, skey);
+      return cipher.doFinal(src);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 }
