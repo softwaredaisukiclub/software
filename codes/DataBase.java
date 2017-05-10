@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 public class DataBase {
 	private ArrayList<File> files = new ArrayList<File>();
-	private HashSet<String> filenames = new HashSet<String>();
 	public DataBase(){
 	}
 
@@ -26,8 +25,9 @@ public class DataBase {
 		}
 	}
 
-	public Boolean store(ArrayList<File> files) {//今は名前が完全一致じゃないと見つけられない
-		return false; //まだ未実装
+	public Boolean store(File storeFiles) {//今は名前が完全一致じゃないと見つけられない
+		files.add(storeFiles);
+		return true;
 	}
-	
+
 }

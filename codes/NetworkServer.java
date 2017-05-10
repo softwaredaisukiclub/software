@@ -31,21 +31,21 @@ public class NetworkServer {
 		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir);
 	}
 /*
-public void sendString(String data, String host) {
+public void sendString(String data, String host, int num) {
 	//ファイル名を送信するメソッド
 }
 
-public String getString() {
+public String getString(int num) {
 		//ファイル名を受信するメソッド
 }
 
 */
-public void sendData(File[] sendFiles,String host) {
+public void sendData(File[] sendFiles,String host,int num) {
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
 			try{
 				File file = zip(sendFiles); // 送信するファイルのオブジェクト
 			// ソケットの準備
-				Socket socket = new Socket(host, PORT);
+				Socket socket = new Socket(host, PORT+num);
 			// ストリームの準備
 				InputStream  inputStream  = new FileInputStream(file);
 				OutputStream outputStream = socket.getOutputStream();
@@ -65,13 +65,13 @@ public void sendData(File[] sendFiles,String host) {
 			}
 		}
 
-		public ArrayList<File> getData() {
+		public ArrayList<File> getData(int num) {
 		String filepath = zipDataDir+UUID.randomUUID()+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
 		ArrayList<File> data = new ArrayList<File>();
 		try{
 			// ソケットの準備
-			ServerSocket serverSocket = new ServerSocket(PORT);
+			ServerSocket serverSocket = new ServerSocket(PORT+num);
 			Socket       socket       = serverSocket.accept();
 			// ストリームの準備
 			InputStream  inputStream  = socket.getInputStream();
