@@ -11,8 +11,8 @@ public class NetworkServer {
 	protected String[] myaddresses;
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
 	public NetworkServer(String address, String[] addresses) {
-		 myaddress = address;
-		 myaddresses = addresses;
+		myaddress = address;
+		myaddresses = addresses;
 	}
 
 
@@ -30,17 +30,48 @@ public class NetworkServer {
 		String filename = file.getName();
 		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir);
 	}
-/*
-public void sendString(String data, String host, int num) {
-	//ファイル名を送信するメソッド
-}
 
-public String getString(int num) {
+	public void sendString(String data, String host,int num) {
+		//ファイル名を送信するメソッド
+		Socket socket = new Socket();
+		try{
+			// ソケットの準備
+			socket = new Socket(host, PORT+num);
+			// 送信バッファ設定
+			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+
+			out.print(data);	// ファイル名送信
+			socket.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getString(int num) {
 		//ファイル名を受信するメソッド
-}
+		// ソケットの準備
+		Socket socket = new Socket();
+		String str= null;
+		try {
+			ServerSocket s = new ServerSocket(PORT+num);
+			socket = s.accept();	// コネクション設定要求を待つ
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));	// データ受信用バッファの設定
+				 str = in.readLine();	// ファイル名受信
+				 socket.close();
+			s.close();
+				return str;
+			}catch(Exception e){
+				e.printStackTrace();
+				return str;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
 
-*/
-public void sendData(File[] sendFiles,String host,int num) {
+	public void sendData(File[] sendFiles,String host,int num) {
 			byte[] buffer = new byte[512];      // ファイル送信時のバッファ
 			try{
 				File file = zip(sendFiles); // 送信するファイルのオブジェクト

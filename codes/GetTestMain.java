@@ -10,7 +10,8 @@ public class GetTestMain {
 		ArrayList<File> files = net.getData(11);
 		for(File file:files){
 		System.out.println(file.getPath());
-	}*/
+	}
+}*/
 
 	public static void main(String[] args) {
 		String myaddress = "localhost";

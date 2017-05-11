@@ -45,19 +45,24 @@ public class Client extends NetworkServer implements Runnable {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		Thread nowthread;
 		query = "find";
-		for(String address : myaddresses) {
-			nowthread = new Thread(this);
-			threads.add(nowthread);
-			addport =  Integer.parseInt(address);
-			nowthread.start();
-			sendString("find", address,0);
-			sendString(filename, address,0);
-		}
-		for(String address : myaddresses) {
-			sendString(filename, address,0);
-		}
-		for(Thread thread : threads) {
-			thread.join();
+		try{
+			for(String address : myaddresses) {
+				nowthread = new Thread(this);
+				threads.add(nowthread);
+				addport =  address.hashCode();
+				nowthread.start();
+				sendString("find", address,0);
+				sendString(filename, address,0);
+			}
+			for(String address : myaddresses) {
+				sendString(filename, address,0);
+			}
+			for(Thread thread : threads) {
+				thread.join();
+			}
+			return files;
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return files;
 	}
@@ -66,20 +71,25 @@ public class Client extends NetworkServer implements Runnable {
 		results.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "delete";
-		for(String address : myaddresses) {
-			Thread thread = new Thread(this);
-			threads.add(thread);
-			addport =  Integer.parseInt(address);
-			thread.start();
-			sendString("delete", address,0);
+		try{
+			for(String address : myaddresses) {
+				Thread thread = new Thread(this);
+				threads.add(thread);
+				addport =  address.hashCode();
+				thread.start();
+				sendString("delete", address,0);
+			}
+			for(String address : myaddresses) {
+				sendString(filename, address,0);
+			}
+			for(Thread thread : threads) {
+				thread.join();
+			}
+			return results.contains("success");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		for(String address : myaddresses) {
-			sendString(filename, address,0);
-		}
-		for(Thread thread : threads) {
-			thread.join();
-		}
-		return results.contains("success");
+		return false;
 	}
 	//今はファイル一つづつしか保存できないようにする
 	public boolean store(File file) {
@@ -87,10 +97,11 @@ public class Client extends NetworkServer implements Runnable {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		query = "find";
 		String filename = file.getName();
+		try{
 		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
-			addport =  Integer.parseInt(address);
+			addport =  address.hashCode();
 			thread.start();
 			sendString("find", address,0);
 		}
@@ -107,7 +118,7 @@ public class Client extends NetworkServer implements Runnable {
 			thread.start();
 			int size = myaddresses.length;
 			String address = myaddresses[new Random().nextInt(size)];//まだ実装をちゃんと考えていない。とりあえすランダムに保存
-			sendString("store", address);
+			sendString("store", address,0);
 			File files[] = {file};
 			sendData(files, address,0);
 			thread.join();
@@ -115,6 +126,10 @@ public class Client extends NetworkServer implements Runnable {
 		}else{
 			return false;
 		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return false;
 	}
 }
 

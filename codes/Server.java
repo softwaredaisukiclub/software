@@ -9,7 +9,7 @@ public class Server extends NetworkServer {
 		// address: 自分のアドレス
 		// addresses: 自分とクライアント以外のアドレス
 		super(address, addresses);
-		addport =Integer.parseInt(address);
+		addport = address.hashCode();
 	}
 
 	public void serverStart() {
@@ -26,17 +26,17 @@ public class Server extends NetworkServer {
 				case "delete":
 				filename = getString(0);
 				if(dataBase.delete(filename)) {
-					sendString("success",addport);
+					sendString("success",host,addport);
 				}else{
-					sendString("failue",addport);
+					sendString("failue",host,addport);
 				}
 				break;
 				case "store":
 				File file = getData(0).get(0);//今は一つだけ
 				if(dataBase.store(file)) {
-					sendString("success",addport);
+					sendString("success",host,addport);
 				}else{
-					sendString("failue",addport);
+					sendString("failue",host,addport);
 				}
 				break;
 			}
