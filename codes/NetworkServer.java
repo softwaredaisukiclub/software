@@ -40,7 +40,7 @@ public class NetworkServer {
 			// 送信バッファ設定
 			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 
-			out.print(data);	// ファイル名送信
+			out.println(data);	// ファイル名送信
 			socket.close();
 		} catch(Exception e) {
 			e.printStackTrace();

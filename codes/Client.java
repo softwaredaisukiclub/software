@@ -5,7 +5,7 @@ public class Client extends NetworkServer implements Runnable {
 	private String query;
 	private ArrayList<String> results = new ArrayList<String>();
 	private ArrayList<File> files = new ArrayList<File>();
-	private int addport;
+	private int addport = 1;
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
@@ -24,10 +24,9 @@ public class Client extends NetworkServer implements Runnable {
 		String result;
 		switch(query) {
 			case "find":
-			ArrayList<File> getFiles = getData(addport);
-			if(getFiles != null) {
-				addFile(getFiles);
-			}
+			//ArrayList<File> getFiles = getData(addport);
+			result = getString(addport);
+			addResult(result);
 			break;
 			case "delete":
 			result = getString(addport);
@@ -40,8 +39,9 @@ public class Client extends NetworkServer implements Runnable {
 		}
 	}
 
-	public ArrayList<File> find(String filename) {
-		files.clear();
+	public boolean find(String filename) {
+		//files.clear();
+		results.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		Thread nowthread;
 		query = "find";
@@ -49,22 +49,26 @@ public class Client extends NetworkServer implements Runnable {
 			for(String address : myaddresses) {
 				nowthread = new Thread(this);
 				threads.add(nowthread);
-				addport =  address.hashCode();
+				//addport =  address.hashCode();
 				nowthread.start();
 				sendString("find", address,0);
+				Thread.sleep(1000);
 				sendString(filename, address,0);
 			}
+			Thread.sleep(1000);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
 			for(Thread thread : threads) {
 				thread.join();
 			}
-			return files;
+			//return files;
+			return results.contains("success");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return files;
+		//return files;
+		return false;
 	}
 
 	public boolean delete(String filename) {
@@ -75,10 +79,11 @@ public class Client extends NetworkServer implements Runnable {
 			for(String address : myaddresses) {
 				Thread thread = new Thread(this);
 				threads.add(thread);
-				addport =  address.hashCode();
+				//addport =  address.hashCode();
 				thread.start();
 				sendString("delete", address,0);
 			}
+			Thread.sleep(1000);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
@@ -101,10 +106,11 @@ public class Client extends NetworkServer implements Runnable {
 		for(String address : myaddresses) {
 			Thread thread = new Thread(this);
 			threads.add(thread);
-			addport =  address.hashCode();
+			//addport =  address.hashCode();
 			thread.start();
 			sendString("find", address,0);
 		}
+		Thread.sleep(1000);
 		for(String address : myaddresses) {
 			sendString(filename, address,0);
 		}

@@ -22,9 +22,10 @@ public class SendTestMain {
 			System.out.println("store failed");
 		}
 		System.out.println("find start");
-		ArrayList<File> files = client.find(file.getName());
-		for(File getFile : files){
-			System.out.println(getFile.getPath());
+		if(client.find(file.getName())){
+			System.out.println("find success");
+		}else{
+			System.out.println("find failed");
 		}
 		System.out.println("delete start");
 		if(client.delete(file.getName())){

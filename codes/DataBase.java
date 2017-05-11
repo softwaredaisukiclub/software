@@ -5,13 +5,15 @@ public class DataBase {
 	public DataBase(){
 	}
 
-	public File[] find(String filename) {//今は名前が完全一致じゃないと見つけられない
+	public boolean find(String filename) {//今は名前が完全一致じゃないと見つけられない
+		System.out.println(files.indexOf(filename));
 		int number = files.indexOf(filename);
 		if(number == -1) {
-			return null;
+			return false;
 		}else{
-			File ansFiles[] = {files.get(number)};
-			return ansFiles;
+			//File ansFiles[] = {files.get(number)};
+			//return ansFiles;
+			return true;
 		}
 	}
 
@@ -25,9 +27,15 @@ public class DataBase {
 		}
 	}
 
-	public Boolean store(File storeFiles) {//今は名前が完全一致じゃないと見つけられない
-		files.add(storeFiles);
-		return true;
+	public Boolean store(File storeFile) {//今は名前が完全一致じゃないと見つけられない
+		try{
+			storeFile.createNewFile();
+			files.add(storeFile);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

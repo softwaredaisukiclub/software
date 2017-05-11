@@ -4,12 +4,12 @@ import java.net.*;
 public class Server extends NetworkServer {
 	public DataBase dataBase  = new DataBase();
 	private static String host = "localhost";
-	private int addport;
+	private int addport = 1;
 	public Server(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addresses: 自分とクライアント以外のアドレス
 		super(address, addresses);
-		addport = address.hashCode();
+		//addport = address.hashCode();
 	}
 
 	public void serverStart() {
@@ -21,7 +21,11 @@ public class Server extends NetworkServer {
 			switch(query) {
 				case "find":
 				filename = getString(0);
-				sendData(dataBase.find(filename),host,addport);
+				if(dataBase.find(filename)) {
+					sendString("success",host,addport);
+				}else{
+					sendString("failue",host,addport);
+				}
 				break;
 				case "delete":
 				filename = getString(0);
