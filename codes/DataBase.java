@@ -1,12 +1,12 @@
 import java.io.*;
 import java.util.*;
 public class DataBase {
-	private ArrayList<File> files = new ArrayList<File>();
+	private ArrayList<String> files = new ArrayList<String>();
+	private String stragePath ="unzip_data/";
 	public DataBase(){
 	}
 
 	public boolean find(String filename) {//今は名前が完全一致じゃないと見つけられない
-		System.out.println(files.indexOf(filename));
 		int number = files.indexOf(filename);
 		if(number == -1) {
 			return false;
@@ -22,6 +22,8 @@ public class DataBase {
 		if(number == -1) {
 			return false;
 		}else{
+			File file = new File(stragePath+filename);
+			file.delete();
 			files.remove(number);
 			return true;
 		}
@@ -30,7 +32,7 @@ public class DataBase {
 	public Boolean store(File storeFile) {//今は名前が完全一致じゃないと見つけられない
 		try{
 			storeFile.createNewFile();
-			files.add(storeFile);
+			files.add(storeFile.getName());
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
