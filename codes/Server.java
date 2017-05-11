@@ -21,6 +21,7 @@ public class Server extends NetworkServer {
 			switch(query) {
 				case "find":
 				filename = getString(0);
+				System.out.println("find");
 				if(dataBase.find(filename)) {
 					sendString("success",host,addport);
 				}else{
@@ -29,6 +30,7 @@ public class Server extends NetworkServer {
 				break;
 				case "delete":
 				filename = getString(0);
+				System.out.println("delete");
 				if(dataBase.delete(filename)) {
 					sendString("success",host,addport);
 				}else{
@@ -37,6 +39,7 @@ public class Server extends NetworkServer {
 				break;
 				case "store":
 				File file = getData(0).get(0);//今は一つだけ
+				System.out.println("store");
 				if(dataBase.store(file)) {
 					sendString("success",host,addport);
 				}else{
