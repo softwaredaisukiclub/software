@@ -40,7 +40,7 @@ public class NetworkServer {
 			// 送信バッファ設定
 			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 
-			out.println(data);	// ファイル名送信
+			out.println(data);	// String送信
 			socket.close();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -86,10 +86,10 @@ public class NetworkServer {
 					outputStream.write(buffer, 0, fileLength);
 				}
 				// 終了処理
+				socket.close();
 				outputStream.flush();
 				outputStream.close();
 				inputStream.close();
-				socket.close();
 				file.delete();
 			}catch(Exception e){
 				e.printStackTrace();
@@ -113,11 +113,11 @@ public class NetworkServer {
 				outputStream.write(buffer, 0, fileLength);
 			}
 			// 終了処理
+			socket.close();
+			serverSocket.close();
 			outputStream.flush();
 			outputStream.close();
 			inputStream.close();
-			socket.close();
-			serverSocket.close();
 			File getData = new File(filepath);
 			data = unzip(getData);
 			getData.delete();

@@ -5,7 +5,7 @@ public class Client extends NetworkServer implements Runnable {
 	private String query;
 	private ArrayList<String> results = new ArrayList<String>();
 	private ArrayList<File> files = new ArrayList<File>();
-	private int addport = 1;
+	private int addport;
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addressies: サーバーのアドレスの配列
@@ -50,14 +50,15 @@ public class Client extends NetworkServer implements Runnable {
 				nowthread = new Thread(this);
 				threads.add(nowthread);
 				//addport =  address.hashCode();
+				addport = Integer.parseInt(address.substring(4,6));
 				nowthread.start();
-				sendString("find", address,0);
+				sendString("find", address,addport);
 				Thread.sleep(100);
-				sendString(filename, address,0);
+				sendString(filename, address,addport);
 			}
 			Thread.sleep(100);
 			for(String address : myaddresses) {
-				sendString(filename, address,0);
+				sendString(filename, address,addport);
 			}
 			for(Thread thread : threads) {
 				thread.join();
@@ -80,12 +81,13 @@ public class Client extends NetworkServer implements Runnable {
 				Thread thread = new Thread(this);
 				threads.add(thread);
 				//addport =  address.hashCode();
+				addport = Integer.parseInt(address.substring(4,6));
 				thread.start();
-				sendString("delete", address,0);
+				sendString("delete", address,addport);
 			}
 			Thread.sleep(100);
 			for(String address : myaddresses) {
-				sendString(filename, address,0);
+				sendString(filename, address,addport);
 			}
 			for(Thread thread : threads) {
 				thread.join();
@@ -107,12 +109,13 @@ public class Client extends NetworkServer implements Runnable {
 			Thread thread = new Thread(this);
 			threads.add(thread);
 			//addport =  address.hashCode();
+			addport = Integer.parseInt(address.substring(4,6));
 			thread.start();
-			sendString("find", address,0);
+			sendString("find", address,addport);
 		}
 		Thread.sleep(100);
 		for(String address : myaddresses) {
-			sendString(filename, address,0);
+			sendString(filename, address,addport);
 		}
 		for(Thread thread : threads) {
 			thread.join();
@@ -124,9 +127,9 @@ public class Client extends NetworkServer implements Runnable {
 			thread.start();
 			int size = myaddresses.length;
 			String address = myaddresses[new Random().nextInt(size)];//まだ実装をちゃんと考えていない。とりあえすランダムに保存
-			sendString("store", address,0);
+			sendString("store", address,addport);
 			File files[] = {file};
-			sendData(files, address,0);
+			sendData(files, address,addport);
 			thread.join();
 			return results.contains("success");
 		}else{
