@@ -52,10 +52,10 @@ public class Client extends NetworkServer implements Runnable {
 				//addport =  address.hashCode();
 				nowthread.start();
 				sendString("find", address,0);
-				Thread.sleep(50);
+				Thread.sleep(100);
 				sendString(filename, address,0);
 			}
-			Thread.sleep(50);
+			Thread.sleep(100);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
@@ -83,7 +83,7 @@ public class Client extends NetworkServer implements Runnable {
 				thread.start();
 				sendString("delete", address,0);
 			}
-			Thread.sleep(50);
+			Thread.sleep(100);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
@@ -110,7 +110,7 @@ public class Client extends NetworkServer implements Runnable {
 			thread.start();
 			sendString("find", address,0);
 		}
-		Thread.sleep(50);
+		Thread.sleep(100);
 		for(String address : myaddresses) {
 			sendString(filename, address,0);
 		}
