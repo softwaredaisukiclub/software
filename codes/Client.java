@@ -100,7 +100,7 @@ public class Client extends NetworkServer implements Runnable {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		String filename = file.getName();
 		try{
-			if(find(file.getName())) {
+			if(!find(file.getName())) {
 				query = "store";
 				results.clear();
 				Thread thread = new Thread(this);

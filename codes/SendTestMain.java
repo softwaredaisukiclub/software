@@ -12,9 +12,11 @@ public class SendTestMain {
 		System.out.println("ended");
 	}*/
 	public static void main(String[] args) {
+		//Eclipseのパス: C:/Users/Public/codes/をつける
 		File file = new File("row_data/"+"hoge/hoge.txt");
-		String servers[] = {"localhost"};
-		Client client = new Client("localhost",servers);
+		String servers[] = {AddressList.getList()};
+		String myaddress = AddressList.getList()
+		Client client = new Client(myaddress,servers);
 		System.out.println("store start");
 		if(client.store(file)){
 			System.out.println("store success");
