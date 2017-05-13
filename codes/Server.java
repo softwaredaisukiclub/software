@@ -40,7 +40,7 @@ public class Server extends NetworkServer {
 				}
 				break;
 				case "store":
-				file = getData(addport).get(0);//今は一つだけ
+				file = getData(0).get(0);//今は一つだけ
 				System.out.println("store");
 				if(dataBase.store(file)) {
 					sendString("success",host,addport);

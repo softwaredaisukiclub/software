@@ -55,8 +55,6 @@ public class Client extends NetworkServer implements Runnable {
 				threads.add(nowthread);
 				nowthread.start();
 				sendString("find", address,0);
-				Thread.sleep(1000);
-				sendString(filename, address,0);
 			}
 			Thread.sleep(1000);
 			for(String address : myaddresses) {
@@ -124,13 +122,17 @@ public class Client extends NetworkServer implements Runnable {
 }
 
 public File get(String filename) {
-	ArrayList<Thread> threads = new ArrayList<Thread>();
 	try{
 		if(find(filename)) {
 			query = "get";
+			files.clear();
+			Thread thread = new Thread(this);
 			String address = myaddresses[results.indexOf("success")];
-			sendString("store", address,0);
-			return	getData(addport).get(0);
+			addport = Integer.parseInt(address.substring(4,7));
+			thread.start();
+			sendString("get", address,0);
+			thread.join();
+			return files.get(0);
 		}else{
 			return null;
 		}
