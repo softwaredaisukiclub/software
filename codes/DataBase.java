@@ -38,6 +38,7 @@ public class DataBase {
 	public File get(String filename) {
 		File file = new File(stragePath+filename);
 		file.delete();
+		files.remove(filename);
 		return file;
 	}
 

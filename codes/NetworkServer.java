@@ -50,7 +50,7 @@ public class NetworkServer {
 	public String getString(int num) {
 		//ファイル名を受信するメソッド
 		// ソケットの準備
-		Socket socket = new Socket();
+		Socket socket = null;
 		String str= null;
 		try {
 			ServerSocket s = new ServerSocket(PORT+num);
@@ -99,7 +99,7 @@ public class NetworkServer {
 		public ArrayList<File> getData(int num) {
 		String filepath = zipDataDir+UUID.randomUUID()+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
-		ArrayList<File> data = new ArrayList<File>();
+		ArrayList<File> data = null;
 		try{
 			// ソケットの準備
 			ServerSocket serverSocket = new ServerSocket(PORT+num);

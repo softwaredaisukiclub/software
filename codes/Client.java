@@ -22,9 +22,9 @@ public class Client extends NetworkServer implements Runnable {
 
 	public void run() {
 		String result;
+		ArrayList<File> files;
 		switch(query) {
 			case "find":
-			//ArrayList<File> getFiles = getData(addport);
 			result = getString(addport);
 			addResult(result);
 			break;
@@ -36,39 +36,39 @@ public class Client extends NetworkServer implements Runnable {
 			result = getString(addport);
 			addResult(result);
 			break;
+			case "get":
+			files = getData(addport);
+			addFile(files);
+			break;
 		}
 	}
 
 	public boolean find(String filename) {
-		//files.clear();
 		results.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		Thread nowthread;
 		query = "find";
 		try{
 			for(String address : myaddresses) {
+				addport = Integer.parseInt(address.substring(4,7));
 				nowthread = new Thread(this);
 				threads.add(nowthread);
-				//addport =  address.hashCode();
-				addport = Integer.parseInt(address.substring(4,6));
 				nowthread.start();
-				sendString("find", address,addport);
-				Thread.sleep(100);
-				sendString(filename, address,addport);
+				sendString("find", address,0);
+				Thread.sleep(1000);
+				sendString(filename, address,0);
 			}
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			for(String address : myaddresses) {
-				sendString(filename, address,addport);
+				sendString(filename, address,0);
 			}
 			for(Thread thread : threads) {
 				thread.join();
 			}
-			//return files;
 			return results.contains("success");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		//return files;
 		return false;
 	}
 
@@ -78,16 +78,15 @@ public class Client extends NetworkServer implements Runnable {
 		query = "delete";
 		try{
 			for(String address : myaddresses) {
+				addport = Integer.parseInt(address.substring(4,7));
 				Thread thread = new Thread(this);
 				threads.add(thread);
-				//addport =  address.hashCode();
-				addport = Integer.parseInt(address.substring(4,6));
 				thread.start();
-				sendString("delete", address,addport);
+				sendString("delete", address,0);
 			}
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			for(String address : myaddresses) {
-				sendString(filename, address,addport);
+				sendString(filename, address,0);
 			}
 			for(Thread thread : threads) {
 				thread.join();
@@ -100,36 +99,19 @@ public class Client extends NetworkServer implements Runnable {
 	}
 	//今はファイル一つづつしか保存できないようにする
 	public boolean store(File file) {
-		files.clear();
 		ArrayList<Thread> threads = new ArrayList<Thread>();
-		query = "find";
 		String filename = file.getName();
 		try{
-		for(String address : myaddresses) {
-			Thread thread = new Thread(this);
-			threads.add(thread);
-			//addport =  address.hashCode();
-			addport = Integer.parseInt(address.substring(4,6));
-			thread.start();
-			sendString("find", address,addport);
-		}
-		Thread.sleep(100);
-		for(String address : myaddresses) {
-			sendString(filename, address,addport);
-		}
-		for(Thread thread : threads) {
-			thread.join();
-		}
-		if(files.isEmpty()) {
-			query = "store";
-			results.clear();
-			Thread thread = new Thread(this);
-			thread.start();
-			int size = myaddresses.length;
+			if(find(file.getName())) {
+				query = "store";
+				results.clear();
+				Thread thread = new Thread(this);
+				thread.start();
+				int size = myaddresses.length;
 			String address = myaddresses[new Random().nextInt(size)];//まだ実装をちゃんと考えていない。とりあえすランダムに保存
-			sendString("store", address,addport);
+			sendString("store", address,0);
 			File files[] = {file};
-			sendData(files, address,addport);
+			sendData(files, address,0);
 			thread.join();
 			return results.contains("success");
 		}else{
@@ -139,7 +121,24 @@ public class Client extends NetworkServer implements Runnable {
 		e.printStackTrace();
 	}
 	return false;
+}
+
+public File get(String filename) {
+	ArrayList<Thread> threads = new ArrayList<Thread>();
+	try{
+		if(find(filename)) {
+			query = "get";
+			String address = myaddresses[results.indexOf("success")];
+			sendString("store", address,0);
+			return	getData(addport).get(0);
+		}else{
+			return null;
+		}
+	}catch(Exception e){
+		e.printStackTrace();
 	}
+	return null;
+}
 }
 
 

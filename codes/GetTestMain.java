@@ -15,8 +15,9 @@ public class GetTestMain {
 
 	public static void main(String[] args) {
 		String myaddress = "localhost";
+		String host = "localhost";
 		String addressies[] = {"localhost"};
-		Server server = new Server(myaddress,addressies);
+		Server server = new Server(myaddress,addressies,host);
 		System.out.println("server start");
 		server.serverStart();
 	}

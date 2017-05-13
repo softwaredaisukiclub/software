@@ -22,5 +22,5 @@ head = "W63C"
 tail = "D"
 
 rep 48 do |i|
-  puts head+sprintf("%03d", i+1)+tail
+  puts "\""+head+sprintf("%03d", i+1)+tail+"\","
 end
