@@ -11,6 +11,7 @@ public class SendTestMain {
 		net.sendData(files, "localhost",11);
 		System.out.println("ended");
 	}*/
+	/*
 	public static void main(String[] args) {
 		File file = new File(PathList.rowDataPath+"hoge/hoge.txt");
 		//アドレスの番号二桁を入れる
@@ -35,5 +36,5 @@ public class SendTestMain {
 		}else{
 			System.out.println("delete failed");
 		}
-	}
+	}*/
 }

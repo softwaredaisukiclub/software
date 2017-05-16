@@ -11,20 +11,21 @@ public class SearchPanel extends JPanel {
 	private JTextField textField;
 	private JButton SearchButton;
 	private JButton BackButton;
-
-	/**
+	private String myaddress = AddressList.getList(48);
+	private String[] servers = {AddressList.getList(48),AddressList.getList(48)};
+	private Client client;
+	private String filename;
+		/**
 	 * Create the panel.
 	 */
 	public SearchPanel() {
 		setLayout(null);
-		String myaddress = AddressList.getList(48);
-		String servers[] = {AddressList.getList(48),AddressList.getList(48)} ;
-		Client client =  new Client(address, servers);
+		client =  new Client(myaddress, servers);
 		textField = new JTextField();
 		textField.setBounds(72, 126, 313, 22);
 		add(textField);
 		textField.setColumns(10);
-		//String str = textField.getText();
+		filename = textField.getText();
 
 		SearchButton = new JButton("検索");
 		SearchButton.setBounds(97, 194, 101, 25);
@@ -37,18 +38,18 @@ public class SearchPanel extends JPanel {
 		BackButton.addActionListener(new BackButtonListener());
 	}
 
-	/*public class SearchButtonListener implements ActionListener {
+	public class SearchButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
-			mframe.showResultPanel();
+			mframe.showResultPanel(client.find(filename));
 			mframe.setVisible(true);
 		}
-	}*/
+	}
 
 	public class BackButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
-			mframe.showInitPanel(Client.find(str));
+			mframe.showInitPanel();
 			mframe.setVisible(true);
 		}
 	}

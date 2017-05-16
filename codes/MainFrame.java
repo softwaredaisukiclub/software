@@ -1,8 +1,6 @@
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-//import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 public class MainFrame extends JFrame {
 
@@ -15,10 +13,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//UIのテーマをwindowsにする
-					String winTheme = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-					UIManager.setLookAndFeel(winTheme);
-
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {

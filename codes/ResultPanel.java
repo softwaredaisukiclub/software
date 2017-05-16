@@ -1,26 +1,20 @@
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class ResultPanel extends JPanel {
-	private JTextField textField;
+	private JPanel p = new JPanel();
 	private JButton DownButton;
 	private JButton BackButton;
-
+  private JLabel label1 = new JLabel("見つかりました！");
+	private JLabel label2 = new JLabel("見つかりませんでした（笑）");
 	/**
 	 * Create the panel.
 	 */
 	public ResultPanel(boolean result) {
 		setLayout(null);
-		JPanel p = new JPanel();
     p.setBounds(56, 99, 334, 22);
-		JLabel label1 = new JLabel("見つかりました！");
-		JLabel label2 = new JLabel("見つかりませんでした（笑）");
 
 		if(result == true) { p.add(label1); }
 		else { p.add(label2); }

@@ -12,7 +12,7 @@ public class GetTestMain {
 		System.out.println(file.getPath());
 	}
 }*/
-
+/*
 	public static void main(String[] args) {
 		//アドレスの番号二桁を入れる
 		String myaddress = AddressList.getList();
@@ -21,5 +21,5 @@ public class GetTestMain {
 		NetworkServer server = new Server(myaddress,addresses,host);
 		System.out.println("server start");
 		server.serverStart();
-	}
+	}*/
 }
