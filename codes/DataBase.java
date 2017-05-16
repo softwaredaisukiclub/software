@@ -5,8 +5,10 @@ public class DataBase {
 	public DataBase(){
 		File tmpFile = new File(PathList.stragePath);
 		String[] filelist = tmpFile.list();
-		for(String filename:filelist) {
-			files.add(filename);
+		if(file != null){
+			for(String filename:filelist) {
+				files.add(filename);
+			}
 		}
 	}
 

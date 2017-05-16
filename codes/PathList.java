@@ -1,5 +1,5 @@
 class PathList {
-  //Eclipseのパス: C:/Users/Public/codes/をつける
+  //Eclipseのパス: H:/software/codes/をつける
   public static final String zipDataPath = "zip_data/";
   public static final String rowDataPath ="row_data/";
   public static final String unzipDataPath ="unzip_data/";

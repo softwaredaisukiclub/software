@@ -15,9 +15,9 @@ public class Client extends NetworkServer implements Runnable {
 		size = addresses.length;
 	}
 
-	private int getIndex(){
+	private int getIndex() {
 		nowAddress++;
-		nowAddress = nowAddress % size
+		nowAddress = nowAddress % size;
 		return nowAddress;
 	}
 
