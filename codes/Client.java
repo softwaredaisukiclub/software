@@ -6,7 +6,7 @@ public class Client extends NetworkServer implements Runnable {
 	private ArrayList<String> results = new ArrayList<String>();
 	private ArrayList<File> files = new ArrayList<File>();
 	private int addport;
-	private int nowAddress = 0;
+	private static int nowAddress = 0;
 	private int size;
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
