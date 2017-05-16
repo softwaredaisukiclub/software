@@ -4,9 +4,6 @@ import java.net.*;
 public class NetworkServer {
 	//送受信されたデータを保存するディレクトリを設定するクラス変数
 	public static final int PORT = 8000;
-	private static String zipDataDir = "zip_data/";//圧縮したデータを保存しておくディレクトリ
-	private static String rowDataDir = "row_data/";//送受信に使う生データを保存しておくディレクトリ
-	private static String unzipDataDir = "unzip_data/";//回答したファイルを保存しておくディレクトリ
 	protected String myaddress;
 	protected String[] myaddresses;
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
@@ -20,15 +17,15 @@ public class NetworkServer {
 	//複数のファイルを引数に持たせると一つのzipファイルになる
 	private File zip(File[] files) throws Exception {
 		String zipFilename ="data.zip";
-		String zipPath = zipDataDir+zipFilename;
-		return ZipClient.compressZip(rowDataDir, files, zipPath);
+		String zipPath = PathList.zipDataPath+zipFilename;
+		return ZipClient.compressZip(PathList.rowDataPath, files, zipPath);
 	}
 
 
 	//解凍時に複数のファイルになることがあるのでリストで返すようにした
 	private ArrayList<File> unzip(File file) throws Exception {
 		String filename = file.getName();
-		return ZipClient.decompressZip(zipDataDir+filename, unzipDataDir);
+		return ZipClient.decompressZip(PathList.zipDataPath+filename, PathList.unzipDataPath);
 	}
 
 	public void sendString(String data, String host,int num) {
@@ -97,7 +94,7 @@ public class NetworkServer {
 		}
 
 		public ArrayList<File> getData(int num) {
-		String filepath = zipDataDir+UUID.randomUUID()+".zip";       // 受信したファイルの保存先
+		String filepath = PathList.zipDataPath+UUID.randomUUID()+".zip";       // 受信したファイルの保存先
 		byte[] buffer = new byte[512]; // ファイル受信時のバッファ
 		ArrayList<File> data = null;
 		try{

@@ -14,10 +14,11 @@ public class GetTestMain {
 }*/
 
 	public static void main(String[] args) {
+		//アドレスの番号二桁を入れる
 		String myaddress = AddressList.getList();
 		String host = AddressList.getList();
-		String addressies[] = {AddressList.getList()};
-		Server server = new Server(myaddress,addressies,host);
+		String addresses[] = {AddressList.getList()};
+		NetworkServer server = new Server(myaddress,addresses,host);
 		System.out.println("server start");
 		server.serverStart();
 	}

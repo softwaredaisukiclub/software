@@ -8,7 +8,7 @@ public class Client extends NetworkServer implements Runnable {
 	private int addport;
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
-		// addressies: サーバーのアドレスの配列
+		// addresses: サーバーのアドレスの配列
 		super(address,addresses);
 	}
 

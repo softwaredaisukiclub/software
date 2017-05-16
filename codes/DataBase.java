@@ -2,8 +2,12 @@ import java.io.*;
 import java.util.*;
 public class DataBase {
 	private HashSet<String> files = new HashSet<String>();
-	private String stragePath ="unzip_data/";
 	public DataBase(){
+		File tmpFile = new File(PathList.stragePath);
+		String[] filelist = tmpFile.list();
+		for(String filename:filelist) {
+			files.add(filename);
+		}
 	}
 
 	public boolean find(String filename) {//今は名前が完全一致じゃないと見つけられない
@@ -16,7 +20,7 @@ public class DataBase {
 
 	public boolean delete(String filename) {//今は名前が完全一致じゃないと見つけられない
 		if(files.contains(filename)) {
-			File file = new File(stragePath+filename);
+			File file = new File(PathList.stragePath+filename);
 			file.delete();
 			files.remove(filename);
 			return true;
@@ -36,9 +40,7 @@ public class DataBase {
 	}
 
 	public File get(String filename) {
-		File file = new File(stragePath+filename);
-		file.delete();
-		files.remove(filename);
+		File file = new File(PathList.stragePath+filename);
 		return file;
 	}
 
