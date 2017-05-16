@@ -102,16 +102,9 @@ class AddressList {
     }
 };
 
-public static String getList(String room,int num) {
+public static String getList(int num) {
     String result = null;
-    switch(room){
-        case "D":
-        result = list[0][num-1];
-        break;
-        case "E":
-        result = list[1][num-1];
-        break;
-    }
+    result = list[0][num-1];
     return result;
 }
 }

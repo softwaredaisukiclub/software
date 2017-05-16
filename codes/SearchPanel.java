@@ -1,5 +1,3 @@
-package ソフトウェア制作;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,9 @@ public class SearchPanel extends JPanel {
 	 */
 	public SearchPanel() {
 		setLayout(null);
-		new Client
+		String myaddress = AddressList.getList(48);
+		String servers[] = {AddressList.getList(48),AddressList.getList(48)} ;
+		Client client =  new Client(address, servers);
 		textField = new JTextField();
 		textField.setBounds(72, 126, 313, 22);
 		add(textField);

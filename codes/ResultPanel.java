@@ -17,14 +17,8 @@ public class ResultPanel extends JPanel {
 	 */
 	public ResultPanel(boolean result) {
 		setLayout(null);
-
-		textField = new JTextField();
-		textField.setBounds(56, 99, 334, 22);
-		add(textField);
-		textField.setColumns(10);
-
 		JPanel p = new JPanel();
-
+    p.setBounds(56, 99, 334, 22);
 		JLabel label1 = new JLabel("見つかりました！");
 		JLabel label2 = new JLabel("見つかりませんでした（笑）");
 

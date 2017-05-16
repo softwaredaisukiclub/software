@@ -5,7 +5,7 @@ public class DataBase {
 	public DataBase(){
 		File tmpFile = new File(PathList.stragePath);
 		String[] filelist = tmpFile.list();
-		if(file != null){
+		if(filelist != null){
 			for(String filename:filelist) {
 				files.add(filename);
 			}

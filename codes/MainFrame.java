@@ -1,5 +1,3 @@
-package ソフトウェア制作;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -82,7 +80,7 @@ public class MainFrame extends JFrame {
 	}
 	public void showResultPanel(boolean result){
 		getContentPane().removeAll();
-		
+
 		setTitle("検索結果");
 		getContentPane().add(new ResultPanel(result));
 		setBounds(100, 100, 500, 350);
