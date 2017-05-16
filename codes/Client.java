@@ -6,10 +6,19 @@ public class Client extends NetworkServer implements Runnable {
 	private ArrayList<String> results = new ArrayList<String>();
 	private ArrayList<File> files = new ArrayList<File>();
 	private int addport;
+	private int nowAddress = 0;
+	private int size;
 	public Client(String address, String[] addresses) {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(address,addresses);
+		size = addresses.length;
+	}
+
+	private int getIndex(){
+		nowAddress++;
+		nowAddress = nowAddress % size
+		return nowAddress;
 	}
 
 	public synchronized void addFile(ArrayList<File> getFiles) {
@@ -56,7 +65,7 @@ public class Client extends NetworkServer implements Runnable {
 				nowthread.start();
 				sendString("find", address,0);
 			}
-			Thread.sleep(1000);
+			Thread.sleep(300);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
@@ -82,7 +91,7 @@ public class Client extends NetworkServer implements Runnable {
 				thread.start();
 				sendString("delete", address,0);
 			}
-			Thread.sleep(1000);
+			Thread.sleep(300);
 			for(String address : myaddresses) {
 				sendString(filename, address,0);
 			}
@@ -105,42 +114,41 @@ public class Client extends NetworkServer implements Runnable {
 				results.clear();
 				Thread thread = new Thread(this);
 				thread.start();
-				int size = myaddresses.length;
-			String address = myaddresses[new Random().nextInt(size)];//まだ実装をちゃんと考えていない。とりあえすランダムに保存
-			sendString("store", address,0);
-			File files[] = {file};
-			sendData(files, address,0);
-			thread.join();
-			return results.contains("success");
-		}else{
-			return false;
+				String address = myaddresses[getIndex()];
+				sendString("store", address,0);
+				File files[] = {file};
+				sendData(files, address,0);
+				thread.join();
+				return results.contains("success");
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}catch(Exception e){
-		e.printStackTrace();
+		return false;
 	}
-	return false;
-}
 
-public File get(String filename) {
-	try{
-		if(find(filename)) {
-			query = "get";
-			files.clear();
-			Thread thread = new Thread(this);
-			String address = myaddresses[results.indexOf("success")];
-			addport = Integer.parseInt(address.substring(4,7));
-			thread.start();
-			sendString("get", address,0);
-			thread.join();
-			return files.get(0);
-		}else{
-			return null;
+	public File get(String filename) {
+		try{
+			if(find(filename)) {
+				query = "get";
+				files.clear();
+				Thread thread = new Thread(this);
+				String address = myaddresses[results.indexOf("success")];
+				addport = Integer.parseInt(address.substring(4,7));
+				thread.start();
+				sendString("get", address,0);
+				thread.join();
+				return files.get(0);
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}catch(Exception e){
-		e.printStackTrace();
+		return null;
 	}
-	return null;
-}
 }
 
 
