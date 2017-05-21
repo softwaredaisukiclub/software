@@ -1,4 +1,5 @@
-class PathList {
+package serverside;
+public class PathList {
   //Eclipseのパス: H:/software/codes/をつける
   public static final String zipDataPath = "zip_data/";
   public static final String rowDataPath ="row_data/";

@@ -1,3 +1,4 @@
+package ソフトウェア制作;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,13 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+
 public class SearchPanel extends JPanel {
 	private JTextField textField;
 	private JButton SearchButton;
 	private JButton BackButton;
-	private String myaddress = AddressList.getList(48);
-	private String[] servers = {AddressList.getList(48),AddressList.getList(48)};
-	private Client client;
+	private static String myaddress = AddressList.getList(48);
+	private static String[] servers = {AddressList.getList(48),AddressList.getList(48)};
+	private static Client client;
 	private String filename;
 		/**
 	 * Create the panel.
