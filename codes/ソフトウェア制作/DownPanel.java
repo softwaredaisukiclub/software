@@ -8,8 +8,8 @@ public class DownPanel extends JPanel {
 	private JTextField textField;
 	private JButton DownButton;
 	private JButton BackButton;
-	private static String myaddress = AddressList.getList(48);
-	private static String[] servers = {AddressList.getList(48),AddressList.getList(48)};
+	private static String myaddress = AddressList.getList(49);
+	private static String[] servers = {AddressList.getList(49)};
 	private static Client client = new Client(myaddress,servers);
 	private String downFilename;
 	/**
@@ -23,12 +23,12 @@ public class DownPanel extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		downFilename = textField.getText();
-		//textField.addActionListener(new DownButtonListener());
+		textField.addActionListener(new DownButtonListener());
 
 		DownButton = new JButton("ダウンロード");
 		DownButton.setBounds(87, 195, 101, 25);
 		add(DownButton);
-		//DownButton.addActionListener(new DownButtonListener());
+		DownButton.addActionListener(new DownButtonListener());
 
 		BackButton = new JButton("戻る");
 		BackButton.setBounds(257, 195, 101, 25);

@@ -20,7 +20,7 @@ public class DownResultPanel extends JPanel {
     }else{
       label = new JLabel("見つかりませんでした（笑）");
     }
-    label.setBounds(185, 133, 38, 24);
+    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("戻る");

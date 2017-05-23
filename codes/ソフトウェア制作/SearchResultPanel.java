@@ -5,10 +5,7 @@ import javax.swing.*;
 
 public class SearchResultPanel extends JPanel {
   private JLabel label;
-  private JButton DownButton;
   private JButton BackButton;
-  private JLabel label1 = new JLabel("見つかりました！");
-  private JLabel label2 = new JLabel("見つかりませんでした（笑）");
   /**
    * Create the panel.
    */
@@ -19,7 +16,7 @@ public class SearchResultPanel extends JPanel {
     }else{
       label = new JLabel("見つかりませんでした（笑）");
     }
-    label.setBounds(185, 133, 38, 24);
+    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("戻る");

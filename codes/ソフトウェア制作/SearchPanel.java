@@ -8,8 +8,8 @@ public class SearchPanel extends JPanel {
 	private JTextField textField;
 	private JButton SearchButton;
 	private JButton BackButton;
-	private static String myaddress = AddressList.getList(48);
-	private static String[] servers = {AddressList.getList(48),AddressList.getList(48)};
+	private static String myaddress = AddressList.getList(49);
+	private static String[] servers = {AddressList.getList(49)};
 	private static Client client = new Client(myaddress,servers);
 	private String filename;
 		/**
@@ -22,12 +22,10 @@ public class SearchPanel extends JPanel {
 		textField.setBounds(72, 126, 313, 22);
 		add(textField);
 		textField.setColumns(10);
-		filename = textField.getText();
-
 		SearchButton = new JButton("検索");
 		SearchButton.setBounds(97, 194, 101, 25);
 		add(SearchButton);
-		//SearchButton.addActionListener(new SearchButtonListener());
+		SearchButton.addActionListener(new SearchButtonListener());
 
 		BackButton = new JButton("戻る");
 		BackButton.setBounds(254, 194, 101, 25);
@@ -38,6 +36,7 @@ public class SearchPanel extends JPanel {
 	public class SearchButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
+			filename = textField.getText();
 			mframe.showSearchResultPanel(client.find(filename));
 			mframe.setVisible(true);
 		}

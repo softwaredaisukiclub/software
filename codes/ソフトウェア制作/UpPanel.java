@@ -11,8 +11,8 @@ public class UpPanel extends JPanel {
 	private JButton UpButton;
 	private JButton BackButton;
 	private JTextArea textArea;
-	private static String myaddress = AddressList.getList(48);
-	private static String[] servers = {AddressList.getList(48),AddressList.getList(48)};
+	private static String myaddress = AddressList.getList(49);
+	private static String[] servers = {AddressList.getList(49)};
 	private static Client client = new Client(myaddress,servers);
 	private ArrayList<File> upFiles;
 	/**
@@ -27,7 +27,7 @@ public class UpPanel extends JPanel {
 		UpButton = new JButton("アップロード");
 		UpButton.setBounds(64, 263, 101, 25);
 		add(UpButton);
-		//UpButton.addActionListener(new UpButtonListener());
+		UpButton.addActionListener(new UpButtonListener());
 		BackButton = new JButton("戻る");
 		BackButton.setBounds(331, 263, 101, 25);
 		add(BackButton);

@@ -14,11 +14,11 @@ public class UpResultPanel extends JPanel {
   public UpResultPanel(boolean result) {
     setLayout(null);
     if(result){
-      label = new JLabel("見つかりました！");
+      label = new JLabel("成功しました！");
     }else{
-      label = new JLabel("見つかりませんでした（笑）");
+      label = new JLabel("成功しませんでした（笑）");
     }
-    label.setBounds(185, 133, 38, 24);
+    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("戻る");

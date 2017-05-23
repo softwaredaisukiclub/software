@@ -11,7 +11,11 @@ public class Server extends NetworkServer {
 		// addresses: 自分とクライアント以外のアドレス
 		super(address, addresses);
 		host = getHost;
+		if(address =="localhost"){
+			addport = 50;
+		}else{
 		addport = Integer.parseInt(address.substring(4,7));
+	}
 	}
 
 	public void serverStart() {

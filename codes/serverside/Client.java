@@ -22,6 +22,14 @@ public class Client extends NetworkServer implements Runnable {
 		return nowAddress;
 	}
 
+	private int getPort(String address) {
+		if(address == "localhost"){
+			return 50;
+		}else{
+			return Integer.parseInt(address.substring(4,7));
+		}
+	}
+
 	public synchronized void addFile(ArrayList<File> getFiles) {
 		files.addAll(getFiles);
 	}
@@ -60,7 +68,7 @@ public class Client extends NetworkServer implements Runnable {
 		query = "find";
 		try{
 			for(String address : myaddresses) {
-				addport = Integer.parseInt(address.substring(4,7));
+				addport = getPort(address);
 				nowthread = new Thread(this);
 				threads.add(nowthread);
 				nowthread.start();
@@ -86,7 +94,7 @@ public class Client extends NetworkServer implements Runnable {
 		query = "delete";
 		try{
 			for(String address : myaddresses) {
-				addport = Integer.parseInt(address.substring(4,7));
+				addport = getPort(address);
 				Thread thread = new Thread(this);
 				threads.add(thread);
 				thread.start();
@@ -137,7 +145,7 @@ public class Client extends NetworkServer implements Runnable {
 				files.clear();
 				Thread thread = new Thread(this);
 				String address = myaddresses[results.indexOf("success")];
-				addport = Integer.parseInt(address.substring(4,7));
+				addport = getPort(address);
 				thread.start();
 				sendString("get", address,0);
 				thread.join();
