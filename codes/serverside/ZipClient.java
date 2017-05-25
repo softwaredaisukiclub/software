@@ -71,6 +71,7 @@ public final class ZipClient {
 
 	private static ArrayList<File> allFiles(File[] files) {
 		ArrayList<File> allfiles = new ArrayList<File>();
+		if(files.length == 0) return null;
 		for(File file : files ) {
 			if(file.isDirectory()) {
 				allfiles.addAll(allFiles(file.listFiles()));

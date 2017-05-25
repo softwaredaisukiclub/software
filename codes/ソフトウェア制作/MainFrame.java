@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(400, 400, 400, 400);
 		//最初は初期画面表示
 		showInitPanel();
 	}
@@ -73,8 +73,8 @@ public class MainFrame extends JFrame {
 	}
 
 	public void showDeletePanel() {
-		getContentPane().remoeAll();
-		
+		getContentPane().removeAll();
+
 		setTitle("削除画面");
 		getContentPane().add(new DeletePanel());
 		setBounds(100, 100, 450, 350);
@@ -84,7 +84,7 @@ public class MainFrame extends JFrame {
 		getContentPane().removeAll();
 
 		setTitle("アップロード結果");
-		getContentPane().add(new );
+		getContentPane().add(new UpResultPanel(result));
 		setBounds(100, 100, 450, 350);
 	}
 
@@ -103,11 +103,11 @@ public class MainFrame extends JFrame {
 		getContentPane().add(new SearchResultPanel(result));
 		setBounds(100, 100, 450, 350);
 	}
-	
-	public void showDeleteResultePanel(boolean result){
+
+	public void showDeleteResultPanel(boolean result){
 		getContentPane().removeAll();
-		
-		setTitile("削除結果");
+
+		setTitle("削除結果");
 		getContentPane().add(new DeleteResultPanel(result));
 		setBounds(100, 100, 450, 350);
 	}

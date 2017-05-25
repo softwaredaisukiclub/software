@@ -11,9 +11,7 @@ public class UpPanel extends JPanel {
 	private JButton UpButton;
 	private JButton BackButton;
 	private JTextArea textArea;
-	private static String myaddress = AddressList.getList(49);
-	private static String[] servers = {AddressList.getList(49)};
-	private static Client client = new Client(myaddress,servers);
+	private static Client client = new Client();
 	private ArrayList<File> upFiles;
 	/**
 	 * Create the panel.

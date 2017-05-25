@@ -6,10 +6,10 @@ public class Server extends NetworkServer {
 	public DataBase dataBase  = new DataBase();
 	private static String host;
 	private int addport;
-	public Server(String address, String[] addresses,String getHost) {
+	public Server(String address, String getHost) {
 		// address: 自分のアドレス
 		// addresses: 自分とクライアント以外のアドレス
-		super(address, addresses);
+		super(address, null);
 		host = getHost;
 		if(address =="localhost"){
 			addport = 50;
@@ -55,6 +55,7 @@ public class Server extends NetworkServer {
 				break;
 				case "get":
 				filename = getString(0);
+				System.out.println("get");
 				File files[] = {dataBase.get(filename)};
 				sendData(files,host,addport);
 				break;

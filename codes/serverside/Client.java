@@ -9,11 +9,12 @@ public class Client extends NetworkServer implements Runnable {
 	private int addport;
 	private static int nowAddress = 0;
 	private int size;
-	public Client(String address, String[] addresses) {
+
+	public Client() {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
-		super(address,addresses);
-		size = addresses.length;
+		super(AddressList.getHost(),AddressList.getServerList());
+		size = AddressList.getServerList.length;
 	}
 
 	private int getIndex() {

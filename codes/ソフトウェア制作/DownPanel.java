@@ -8,9 +8,7 @@ public class DownPanel extends JPanel {
 	private JTextField textField;
 	private JButton DownButton;
 	private JButton BackButton;
-	private static String myaddress = AddressList.getList(49);
-	private static String[] servers = {AddressList.getList(49)};
-	private static Client client = new Client(myaddress,servers);
+	private static Client client = new Client();
 	private String downFilename;
 	/**
 	 * Create the panel.

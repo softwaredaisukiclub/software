@@ -43,9 +43,9 @@ public class InitPanel extends JPanel {
 		SearchButton.addActionListener(new SearchButtonListener());
 
 		DeleteButton = new JButton("削除");
-		DeleteButton.setBounds(177, 128.5, 101, 25);
-		add(SearchButton);
-		SearchButton.addActionListener(new SearchButtonListener());
+		DeleteButton.setBounds(177, 128, 101, 25);
+		add(DeleteButton);
+		DeleteButton.addActionListener(new DeleteButtonListener());
 	}
 
 	public class ExitButtonListener implements ActionListener {
@@ -75,6 +75,15 @@ public class InitPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
 			mframe.showSearchPanel();
+			mframe.setVisible(true);
+		}
+	}
+
+		public class DeleteButtonListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
+			mframe.showDeletePanel();
 			mframe.setVisible(true);
 		}
 	}

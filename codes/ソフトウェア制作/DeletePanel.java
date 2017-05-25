@@ -4,31 +4,28 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import serverside.*;
-public class DownPanel extends JPanel {
+public class DeletePanel extends JPanel {
 	private JTextField textField;
-	private JButton DownButton;
+	private JButton DeleteButton;
 	private JButton BackButton;
-	private static String myaddress = AddressList.getList(49);
-	private static String[] servers = {AddressList.getList(49)};
-	private static Client client = new Client(myaddress,servers);
-	private String downFilename;
+	private static Client client = new Client();
+	private String filename;
 	/**
 	 * Create the panel.
 	 */
-	public DownPanel() {
+	public DeletePanel() {
 		setLayout(null);
 
 		textField = new JTextField();
 		textField.setBounds(56, 99, 334, 22);
 		add(textField);
 		textField.setColumns(10);
-		downFilename = textField.getText();
-		textField.addActionListener(new DownButtonListener());
+		textField.addActionListener(new DeleteButtonListener());
 
-		DownButton = new JButton("削除");
-		DownButton.setBounds(87, 195, 101, 25);
-		add(DownButton);
-		DownButton.addActionListener(new DownButtonListener());
+		DeleteButton = new JButton("削除");
+		DeleteButton.setBounds(87, 195, 101, 25);
+		add(DeleteButton);
+		DeleteButton.addActionListener(new DeleteButtonListener());
 
 		BackButton = new JButton("戻る");
 		BackButton.setBounds(257, 195, 101, 25);
@@ -42,10 +39,11 @@ public class DownPanel extends JPanel {
 			mframe.setVisible(true);
 		}
 	}
-	public class DownButtonListener implements ActionListener {
+	public class DeleteButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
-			mframe.showDownResultPanel(client.get(downFilename));
+			filename = textField.getText();
+			mframe.showDeleteResultPanel(client.delete(filename));
 			mframe.setVisible(true);
 		}
 	}

@@ -8,16 +8,13 @@ public class SearchPanel extends JPanel {
 	private JTextField textField;
 	private JButton SearchButton;
 	private JButton BackButton;
-	private static String myaddress = AddressList.getList(49);
-	private static String[] servers = {AddressList.getList(49)};
-	private static Client client = new Client(myaddress,servers);
+	private static Client client = new Client();
 	private String filename;
 		/**
 	 * Create the panel.
 	 */
 	public SearchPanel() {
 		setLayout(null);
-		client =  new Client(myaddress, servers);
 		textField = new JTextField();
 		textField.setBounds(72, 126, 313, 22);
 		add(textField);

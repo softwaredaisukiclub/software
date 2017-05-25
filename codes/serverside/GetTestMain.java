@@ -17,10 +17,9 @@ public class GetTestMain {
 
 	public static void main(String[] args) {
 		//アドレスの番号二桁を入れる
-		String myaddress = AddressList.getList(6);
-		String host = AddressList.getList(5);
-		String addresses[] = {AddressList.getList(6)};
-		Server server = new Server(myaddress,addresses,host);
+		String myaddress = AddressList.getList(49);
+		String host = AddressList.getList(49);
+		Server server = new Server(myaddress,host);
 		System.out.println("server start");
 		server.serverStart();
 	}

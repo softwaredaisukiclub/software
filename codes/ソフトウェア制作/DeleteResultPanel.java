@@ -3,13 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SearchResultPanel extends JPanel {
+public class DeleteResultPanel extends JPanel {
   private JLabel label;
   private JButton BackButton;
   /**
    * Create the panel.
    */
-  public SearchResultPanel(boolean result) {
+  public DeleteResultPanel(boolean result) {
      setLayout(null);
     if(result){
       label = new JLabel("削除しました");

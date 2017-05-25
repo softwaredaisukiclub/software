@@ -1,6 +1,6 @@
 package serverside;
 public class PathList {
-  //Eclipseのパス: H:/software/codes/をつける
+  //Eclipseのパス: C:/Users/Publicに変更
   public static final String zipDataPath = "zip_data/";
   public static final String rowDataPath ="row_data/";
   public static final String unzipDataPath ="unzip_data/";
