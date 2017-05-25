@@ -16,8 +16,8 @@ public class SendTestMain {
 	public static void main(String[] args) {
 		File file = new File(PathList.rowDataPath+"hoge/hoge.txt");
 		//アドレスの番号二桁を入れる
-		String servers[] = {AddressList.getList(49)};
-		String myaddress = AddressList.getList(49);
+		String servers[] = {AddressList.getList(6)};
+		String myaddress = AddressList.getList(5);
 		Client client = new Client(myaddress,servers);
 		System.out.println("store start");
 		if(client.store(file)){
