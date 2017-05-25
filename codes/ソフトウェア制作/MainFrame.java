@@ -72,11 +72,19 @@ public class MainFrame extends JFrame {
 		setBounds(100, 100, 500, 350);
 	}
 
+	public void showDeletePanel() {
+		getContentPane().remoeAll();
+		
+		setTitle("削除画面");
+		getContentPane().add(new DeletePanel());
+		setBounds(100, 100, 450, 350);
+	}
+
 	public void showUpResultPanel(boolean result){
 		getContentPane().removeAll();
 
 		setTitle("アップロード結果");
-		getContentPane().add(new UpResultPanel(result));
+		getContentPane().add(new );
 		setBounds(100, 100, 450, 350);
 	}
 
@@ -95,4 +103,13 @@ public class MainFrame extends JFrame {
 		getContentPane().add(new SearchResultPanel(result));
 		setBounds(100, 100, 450, 350);
 	}
+	
+	public void showDeleteResultePanel(boolean result){
+		getContentPane().removeAll();
+		
+		setTitile("削除結果");
+		getContentPane().add(new DeleteResultPanel(result));
+		setBounds(100, 100, 450, 350);
+	}
+
 }

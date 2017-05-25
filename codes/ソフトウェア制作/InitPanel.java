@@ -14,6 +14,7 @@ public class InitPanel extends JPanel {
 	private JButton UpButton;
 	private JButton DownButton;
 	private JButton SearchButton;
+	private JButton DeleteButton;
 
 	/**
 	 * Create the panel.
@@ -38,6 +39,11 @@ public class InitPanel extends JPanel {
 
 		SearchButton = new JButton("検索");
 		SearchButton.setBounds(92, 180, 101, 25);
+		add(SearchButton);
+		SearchButton.addActionListener(new SearchButtonListener());
+
+		DeleteButton = new JButton("削除");
+		DeleteButton.setBounds(177, 128.5, 101, 25);
 		add(SearchButton);
 		SearchButton.addActionListener(new SearchButtonListener());
 	}
