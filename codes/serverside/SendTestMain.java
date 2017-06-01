@@ -29,6 +29,12 @@ public class SendTestMain {
 		}else{
 			System.out.println("find failed");
 		}
+		System.out.println("get start");
+		if(client.get(file.getName()) != null){
+			System.out.println("get success");
+		}else{
+			System.out.println("get failed");
+		}
 		System.out.println("delete start");
 		if(client.delete(file.getName())){
 			System.out.println("delete success");

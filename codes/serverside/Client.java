@@ -14,7 +14,7 @@ public class Client extends NetworkServer implements Runnable {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
-		size = AddressList.getServerList.length;
+		size = AddressList.getServerList().length;
 	}
 
 	private int getIndex() {
@@ -24,7 +24,7 @@ public class Client extends NetworkServer implements Runnable {
 	}
 
 	private int getPort(String address) {
-		if(address == "localhost"){
+		if(address.equals("localhost")){
 			return 50;
 		}else{
 			return Integer.parseInt(address.substring(4,7));
@@ -36,7 +36,9 @@ public class Client extends NetworkServer implements Runnable {
 	}
 
 	public synchronized void addResult(String getResult) {
-		results.add(getResult);
+		if(!getResult.equals("failue")) {
+			results.add(getResult);
+		}
 	}
 
 	public void run() {
@@ -82,7 +84,7 @@ public class Client extends NetworkServer implements Runnable {
 			for(Thread thread : threads) {
 				thread.join();
 			}
-			return results.contains("success");
+			return (results.size() > 0);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -143,12 +145,13 @@ public class Client extends NetworkServer implements Runnable {
 		try{
 			if(find(filename)) {
 				query = "get";
-				files.clear();
 				Thread thread = new Thread(this);
-				String address = myaddresses[results.indexOf("success")];
+				String address = results.get(0);
 				addport = getPort(address);
 				thread.start();
 				sendString("get", address,0);
+				Thread.sleep(300);
+				sendString(filename,address,0);
 				thread.join();
 				return files.get(0);
 			}else{

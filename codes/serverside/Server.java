@@ -30,7 +30,7 @@ public class Server extends NetworkServer {
 				filename = getString(0);
 				System.out.println("find");
 				if(dataBase.find(filename)) {
-					sendString("success",host,addport);
+					sendString(myaddress,host,addport);
 				}else{
 					sendString("failue",host,addport);
 				}
