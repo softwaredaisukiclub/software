@@ -1,24 +1,26 @@
-package ソフトウェア制作;
+package front;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.*;
+import java.io.*;
 import serverside.*;
-public class UpResultPanel extends JPanel {
+public class DownResultPanel extends JPanel {
 
   private JLabel label;
   private JButton BackButton;
   /**
    * Create the panel.
    */
-  public UpResultPanel(boolean result) {
+  public DownResultPanel(File file) {
     setLayout(null);
-    if(result){
-      label = new JLabel("成功しました！");
+    if(file != null){
+      label = new JLabel(file.getAbsolutePath());
     }else{
-      label = new JLabel("成功しませんでした（笑）");
+      label = new JLabel("見つかりませんでした（笑）");
     }
-    label.setBounds(185, 133, 200, 24);
+    label.setBounds(20, 133, 400, 10);
     add(label);
 
     BackButton = new JButton("戻る");

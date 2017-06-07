@@ -1,20 +1,20 @@
-package ソフトウェア制作;
+package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SearchResultPanel extends JPanel {
+public class DeleteResultPanel extends JPanel {
   private JLabel label;
   private JButton BackButton;
   /**
    * Create the panel.
    */
-  public SearchResultPanel(boolean result) {
+  public DeleteResultPanel(boolean result) {
      setLayout(null);
     if(result){
-      label = new JLabel("見つかりました！");
+      label = new JLabel("削除しました");
     }else{
-      label = new JLabel("見つかりませんでした（笑）");
+      label = new JLabel("削除できませんでした（笑）");
     }
     label.setBounds(185, 133, 200, 24);
     add(label);

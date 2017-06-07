@@ -1,34 +1,30 @@
-package ソフトウェア制作;
-
+package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.*;
-import java.io.*;
-import serverside.*;
-public class DownResultPanel extends JPanel {
 
+public class SearchResultPanel extends JPanel {
   private JLabel label;
   private JButton BackButton;
   /**
    * Create the panel.
    */
-  public DownResultPanel(File file) {
-    setLayout(null);
-    if(file != null){
-      label = new JLabel(file.getAbsolutePath());
+  public SearchResultPanel(boolean result) {
+     setLayout(null);
+    if(result){
+      label = new JLabel("見つかりました！");
     }else{
       label = new JLabel("見つかりませんでした（笑）");
     }
-    label.setBounds(20, 133, 400, 10);
+    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("戻る");
-    BackButton.setBounds(151, 234, 101, 25);
+    BackButton.setBounds(257, 195, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());
   }
-  public class BackButtonListener implements ActionListener {
+  public class BackButtonListener implements ActionListener{
     public void actionPerformed(ActionEvent e){
       MainFrame mframe = (MainFrame)SwingUtilities.getWindowAncestor((Component)e.getSource());
       mframe.showInitPanel();

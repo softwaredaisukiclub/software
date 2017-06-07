@@ -1,4 +1,4 @@
-package ソフトウェア制作;
+package front;
 
 import java.awt.*;
 import java.io.*;
