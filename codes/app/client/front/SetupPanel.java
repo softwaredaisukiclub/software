@@ -1,4 +1,4 @@
-package front;
+package client.front;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import serverside.*;
+import client.serverside.*;
 
 public class SetupPanel extends JPanel {
   private JTextField textField;

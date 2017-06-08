@@ -1,11 +1,11 @@
-package front;
+package client.front;
 import java.awt.Component;
 import java.awt.datatransfer.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import serverside.*;
+import client.serverside.*;
 public class UpPanel extends JPanel {
 	//private JTextField textField;
 	private JButton UpButton;

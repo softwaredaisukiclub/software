@@ -1,4 +1,4 @@
-package ソフトウェア制作;
+package server.front;
 
 import java.awt.EventQueue;
 

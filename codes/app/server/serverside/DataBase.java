@@ -1,4 +1,4 @@
-package serverside;
+package server.serverside;
 import java.io.*;
 import java.util.*;
 public class DataBase {

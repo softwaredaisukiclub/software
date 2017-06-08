@@ -1,4 +1,4 @@
-package serverside;
+package client.serverside;
 import java.util.zip.*;
 import java.util.*;
 import java.io.*;

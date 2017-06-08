@@ -1,4 +1,4 @@
-package front;
+package client.front;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

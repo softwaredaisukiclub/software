@@ -1,9 +1,9 @@
-package front;
+package client.front;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import serverside.*;
+import client.serverside.*;
 public class DeletePanel extends JPanel {
 	private JTextField textField;
 	private JButton DeleteButton;

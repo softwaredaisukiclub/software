@@ -1,4 +1,4 @@
-package serverside;
+package server.serverside;
 public class AddressList {
   private static final String list[] = {
         "W63C001D",

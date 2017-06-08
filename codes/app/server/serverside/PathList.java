@@ -1,4 +1,4 @@
-package serverside;
+package server.serverside;
 public class PathList {
   //Eclipseのパス: C:/Users/Publicに変更
   public static final String zipDataPath = "zip_data/";
