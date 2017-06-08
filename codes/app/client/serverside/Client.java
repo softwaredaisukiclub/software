@@ -141,7 +141,9 @@ public class Client extends NetworkServer implements Runnable {
 				results.clear();
 				Thread thread = new Thread(this);
 				thread.start();
-				String address = myaddresses[getIndex()];
+				int numnum = getIndex();
+				System.out.println(numnum);
+				String address = myaddresses[numnum];
 				sendString("store", address,0);
 				File files[] = {file};
 				sendData(files, address,0);
