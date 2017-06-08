@@ -8,13 +8,12 @@ public class Client extends NetworkServer implements Runnable {
 	private ArrayList<File> files = new ArrayList<File>();
 	private int addport;
 	private static int nowAddress = 0;
-	private int size;
+	private static int size;
 
 	public Client() {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
-		size = AddressList.getServerList().length;
 		File zipdir = new File(PathList.zipDataPath);
 		if(!zipdir.exists()){
 			zipdir.mkdir();
@@ -27,6 +26,10 @@ public class Client extends NetworkServer implements Runnable {
 		if(!unzipdir.exists()){
 			unzipdir.mkdir();
 		}
+	}
+
+	public static void setSize(int num) {
+		size = num;
 	}
 
 	private int getIndex() {
