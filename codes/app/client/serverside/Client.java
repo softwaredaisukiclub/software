@@ -31,7 +31,7 @@ public class Client extends NetworkServer implements Runnable {
 
 	private int getIndex() {
 		nowAddress++;
-		nowAddress %= nowAddress;
+		nowAddress %= size;
 		return nowAddress;
 	}
 
