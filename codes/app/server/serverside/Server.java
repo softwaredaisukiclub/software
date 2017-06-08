@@ -33,6 +33,7 @@ public class Server extends NetworkServer {
 		File file;
 		while(true) {
 			String query = getString(0);
+			System.out.println(query);
 			switch(query) {
 				case "find":
 				filename = getString(0);
@@ -70,6 +71,7 @@ public class Server extends NetworkServer {
 				case "test":
 				System.out.println("test");
 				break;
+
 			}
 		}
 	}
