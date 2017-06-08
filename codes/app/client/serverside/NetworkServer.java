@@ -34,7 +34,8 @@ public class NetworkServer {
 		Socket socket = new Socket();
 		try{
 			// ソケットの準備
-			socket = new Socket(host, PORT+num);
+			socket.connect(new InetSocketAddress(host, PORT+num),1000);
+			//socket = new Socket(host, PORT+num);
 			// 送信バッファ設定
 			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 
