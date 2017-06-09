@@ -2,6 +2,7 @@ package client.serverside;
 import java.util.*;
 import java.io.*;
 import java.net.*;
+import module.*;
 public class Client extends NetworkServer implements Runnable {
 	private String query;
 	private ArrayList<String> results = new ArrayList<String>();
@@ -86,12 +87,8 @@ public class Client extends NetworkServer implements Runnable {
 				sendString("find", address,0);
 			}
 			Thread.sleep(300);
-			for(String address : myaddresses) {
-				sendString(filename, address,0);
-			}
-			for(Thread thread : threads) {
-				thread.join();
-			}
+			for(String address : myaddresses) sendString(filename, address,0);
+			for(Thread thread : threads)      thread.join();
 			return (results.size() > 0);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -112,12 +109,8 @@ public class Client extends NetworkServer implements Runnable {
 				sendString("delete", address,0);
 			}
 			Thread.sleep(300);
-			for(String address : myaddresses) {
-				sendString(filename, address,0);
-			}
-			for(Thread thread : threads) {
-				thread.join();
-			}
+			for(String address : myaddresses) sendString(filename, address,0);
+			for(Thread thread : threads) thread.join();
 			return results.contains("success");
 		}catch(Exception e){
 			e.printStackTrace();

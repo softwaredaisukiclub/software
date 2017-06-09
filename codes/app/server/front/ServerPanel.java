@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import server.serverside.*;
-
+import module.*;
 public class ServerPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;

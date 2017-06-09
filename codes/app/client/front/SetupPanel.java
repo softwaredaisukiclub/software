@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import client.serverside.*;
-
+import module.*;
 public class SetupPanel extends JPanel {
   private JTextField textField;
   private JLabel label;
