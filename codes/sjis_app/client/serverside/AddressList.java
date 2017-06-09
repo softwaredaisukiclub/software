@@ -68,8 +68,6 @@ public static void setupServerList() {
   for(String name : getServerList()){
       System.out.println(name);
   }
-  Client.setSize(getServerList().length);
-  System.out.println(getServerList().length);
 }
 
 public static void addServerList(String name) {

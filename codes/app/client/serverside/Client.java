@@ -8,14 +8,14 @@ public class Client extends NetworkServer implements Runnable {
 	private ArrayList<File> files = new ArrayList<File>();
 	private int addport;
 	private static int nowAddress = -1;
-	private static int size = null;
+	private static int size = 0;
 
 	public Client() {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
 
-		if(size == null) size = AddressList.getServerList().length;
+		if(size == 0) size = AddressList.getServerList().length;
 
 		File zipdir = new File(PathList.zipDataPath);
 		if(!zipdir.exists()) zipdir.mkdir();

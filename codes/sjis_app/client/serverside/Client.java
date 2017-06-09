@@ -7,30 +7,25 @@ public class Client extends NetworkServer implements Runnable {
 	private ArrayList<String> results = new ArrayList<String>();
 	private ArrayList<File> files = new ArrayList<File>();
 	private int addport;
-	private static int nowAddress = 0;
-	private static int size;
+	private static int nowAddress = -1;
+	private static int size = 0;
 
 	public Client() {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
+
+		if(size == 0) size = AddressList.getServerList().length;
+
 		File zipdir = new File(PathList.zipDataPath);
-		if(!zipdir.exists()){
-			zipdir.mkdir();
-		}
+		if(!zipdir.exists()) zipdir.mkdir();
 		File rowdir = new File(PathList.rowDataPath);
-		if(!rowdir.exists()){
-			rowdir.mkdir();
-		}
+		if(!rowdir.exists()) rowdir.mkdir();
 		File unzipdir = new File(PathList.unzipDataPath);
-		if(!unzipdir.exists()){
-			unzipdir.mkdir();
-		}
+		if(!unzipdir.exists()) unzipdir.mkdir();
 	}
 
-	public static void setSize(int num) {
-		size = num;
-	}
+
 
 	private int getIndex() {
 		nowAddress++;
@@ -51,9 +46,7 @@ public class Client extends NetworkServer implements Runnable {
 	}
 
 	public synchronized void addResult(String getResult) {
-		if(!getResult.equals("failue")) {
-			results.add(getResult);
-		}
+		if(!getResult.equals("failue")) results.add(getResult);
 	}
 
 	public void run() {
@@ -139,11 +132,10 @@ public class Client extends NetworkServer implements Runnable {
 			if(!find(file.getName())) {
 				query = "store";
 				results.clear();
+				String address = myaddresses[getIndex()];
+				addport = getPort(address);
 				Thread thread = new Thread(this);
 				thread.start();
-				int numnum = getIndex();
-				System.out.println(numnum);
-				String address = myaddresses[numnum];
 				sendString("store", address,0);
 				File files[] = {file};
 				sendData(files, address,0);
