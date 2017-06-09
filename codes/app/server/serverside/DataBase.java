@@ -7,11 +7,7 @@ public class DataBase {
 	public DataBase(){
 		File tmpFile = new File(PathList.stragePath);
 		String[] filelist = tmpFile.list();
-		if(filelist != null){
-			for(String filename:filelist) {
-				files.add(filename);
-			}
-		}
+		if(filelist != null) for(String filename:filelist) files.add(filename);
 	}
 
 	public boolean find(String filename) {//今は名前が完全一致じゃないと見つけられない

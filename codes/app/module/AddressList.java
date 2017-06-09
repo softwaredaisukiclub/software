@@ -62,12 +62,9 @@ public static String getList(int num) {
 
 public static void setupServerList() {
   NetworkServer s = new NetworkServer(getHost(),getServerList());
-  for(String hostname : list) {
-      s.sendString("test",hostname,0);
-  }
-  for(String name : getServerList()){
-      System.out.println(name);
-  }
+  for(String hostname : list)            s.sendString("test",hostname,0);
+  for(String name     : getServerList()) System.out.println(name);
+
 }
 
 public static void addServerList(String name) {

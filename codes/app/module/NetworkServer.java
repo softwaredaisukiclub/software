@@ -48,9 +48,7 @@ public class NetworkServer {
 			if(data.equals("test")) AddressList.addServerList(host);
 
 		} catch(Exception e) {
-			if(!data.equals("test")){
-				e.printStackTrace();
-			}
+			if(!data.equals("test")) e.printStackTrace();
 		}
 	}
 

@@ -16,10 +16,12 @@ public class Client extends NetworkServer implements Runnable {
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
 		timeout = 10;
+
 		if(size == 0) size = AddressList.getServerList().length;
 
 		File zipdir = new File(PathList.zipDataPath);
 		if(!zipdir.exists()) zipdir.mkdir();
+
 		File unzipdir = new File(PathList.unzipDataPath);
 		if(!unzipdir.exists()) unzipdir.mkdir();
 	}
@@ -86,7 +88,7 @@ public class Client extends NetworkServer implements Runnable {
 			}
 			Thread.sleep(300);
 			for(String address : myaddresses) sendString(filename, address,0);
-			for(Thread thread : threads)      thread.join();
+			for(Thread thread  : threads)     thread.join();
 			return (results.size() > 0);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -108,7 +110,7 @@ public class Client extends NetworkServer implements Runnable {
 			}
 			Thread.sleep(300);
 			for(String address : myaddresses) sendString(filename, address,0);
-			for(Thread thread : threads) thread.join();
+			for(Thread thread  : threads)     thread.join();
 			return results.contains("success");
 		}catch(Exception e){
 			e.printStackTrace();

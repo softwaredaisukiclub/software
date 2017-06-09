@@ -17,7 +17,6 @@ public class ServerFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//UIのテーマをwindowsにする
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					ServerFrame frame = new ServerFrame();
 					frame.setVisible(true);
@@ -33,11 +32,6 @@ public class ServerFrame extends JFrame {
 	 */
 	public ServerFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);*/
 		showServerPanel();
 	}
 

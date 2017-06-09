@@ -38,7 +38,7 @@ public final class ZipClient {
 	public static ArrayList<File> decompressZip( String inputFile , String outputDir ) throws Exception {
 		ArrayList<File> files = new ArrayList<File>();
 		try(
-				FileInputStream fis = new FileInputStream(inputFile);
+				FileInputStream fis     = new FileInputStream(inputFile);
 				ZipInputStream  archive = new ZipInputStream(fis);
 				){
 			ZipEntry entry   = null;

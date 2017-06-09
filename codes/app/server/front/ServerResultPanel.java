@@ -10,8 +10,8 @@ public class ServerResultPanel extends JPanel {
    * Create the panel.
    */
   public ServerResultPanel() {
-     setLayout(null);
-      label = new JLabel("設定が完了しました。現在稼働中です");
+    setLayout(null);
+    label = new JLabel("設定が完了しました。現在稼働中です");
     label.setBounds(185, 133, 200, 24);
     add(label);
 

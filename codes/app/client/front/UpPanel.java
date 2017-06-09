@@ -56,14 +56,9 @@ public class UpPanel extends JPanel {
 	}
 	public class DropFileHandler extends TransferHandler {
 		/*ドロップされたものを受け取るか判断(ファイルの時だけ受け取る)*/
-		public boolean canImport(TransferSupport support){
-			if(!support.isDrop()){
-				//ドロップ操作ではない場合は受け取らない
-				return false;
-			}
-			if(!support.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
-				return false;
-			}
+		public boolean canImport(TransferSupport support) {
+			if(!support.isDrop()) return false;
+			if(!support.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) return false;
 			return true;
 		}
 		/*ドロップされたファイルを受け取る*/
