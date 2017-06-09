@@ -6,7 +6,4 @@ rm  module/*.class
 rm  client.jar
 rm  server.jar
 rm -rf ../sjis_app
-rm -rf row_data
-rm -rf unzip_data
-rm -rf zip_data
 rm -rf strage

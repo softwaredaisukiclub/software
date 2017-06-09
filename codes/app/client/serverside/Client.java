@@ -20,8 +20,6 @@ public class Client extends NetworkServer implements Runnable {
 
 		File zipdir = new File(PathList.zipDataPath);
 		if(!zipdir.exists()) zipdir.mkdir();
-		File rowdir = new File(PathList.rowDataPath);
-		if(!rowdir.exists()) rowdir.mkdir();
 		File unzipdir = new File(PathList.unzipDataPath);
 		if(!unzipdir.exists()) unzipdir.mkdir();
 	}

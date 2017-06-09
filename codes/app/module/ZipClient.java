@@ -3,9 +3,8 @@ import java.util.zip.*;
 import java.util.*;
 import java.io.*;
 public final class ZipClient {
-	public static File compressZip( String rootPath, File[] inputFiles , String outputFile ) throws Exception {
+	public static File compressZip(File[] inputFiles , String outputFile ) throws Exception {
 		//ファイルを圧縮するメソッド
-		if( rootPath     == null ) throw new Exception();
 		if( inputFiles   == null ) throw new Exception();
 		if( outputFile   == null ) throw new Exception();
 		ArrayList<File> files = new ArrayList<File>();

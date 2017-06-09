@@ -19,7 +19,7 @@ public class NetworkServer {
 	private File zip(File[] files) throws Exception {
 		String zipFilename ="data.zip";
 		String zipPath = PathList.zipDataPath+zipFilename;
-		return ZipClient.compressZip(PathList.rowDataPath, files, zipPath);
+		return ZipClient.compressZip(files, zipPath);
 	}
 
 
