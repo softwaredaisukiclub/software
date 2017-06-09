@@ -15,7 +15,7 @@ public class Client extends NetworkServer implements Runnable {
 		// address: 自分のアドレス
 		// addresses: サーバーのアドレスの配列
 		super(AddressList.getHost(),AddressList.getServerList());
-
+		timeout = 10;
 		if(size == 0) size = AddressList.getServerList().length;
 
 		File zipdir = new File(PathList.zipDataPath);

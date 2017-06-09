@@ -5,6 +5,7 @@ import java.net.*;
 public class NetworkServer {
 	//送受信されたデータを保存するディレクトリを設定するクラス変数
 	public static final int PORT = 8000;
+	protected int timeout = 0;
 	protected String myaddress;
 	protected String[] myaddresses;
 	//コンストラクタ。自分のアドレスと送信する相手のアドレスを配列でもつ。（まだ変更するかも）
@@ -60,6 +61,7 @@ public class NetworkServer {
 		String str= null;
 		try {
 			ServerSocket s = new ServerSocket(PORT+num);
+			s.setSoTimeout(1000*timeout);
 			socket = s.accept();	// コネクション設定要求を待つ
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));	// データ受信用バッファの設定
@@ -109,6 +111,7 @@ public class NetworkServer {
 		try{
 			// ソケットの準備
 			ServerSocket serverSocket = new ServerSocket(PORT+num);
+			serverSocket.setSoTimeout(1000*timeout);
 			Socket       socket       = serverSocket.accept();
 			// ストリームの準備
 			InputStream  inputStream  = socket.getInputStream();
