@@ -14,7 +14,7 @@ public final class ZipClient {
 				ZipOutputStream      archive = new ZipOutputStream(out);
 				){
 			files = allFiles(inputFiles);
-			archive.setLevel(9);//圧縮レベルの設定
+			archive.setLevel(0);//圧縮レベルの設定
 			for( File file : files ) {
 				String fileName = file.getName();
 				String filePath = file.getPath();
