@@ -17,18 +17,18 @@ public class DeletePanel extends JPanel {
 		setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(56, 99, 334, 22);
+		textField.setBounds(350, 300, 300, 22);
 		add(textField);
 		textField.setColumns(10);
 		textField.addActionListener(new DeleteButtonListener());
 
-		DeleteButton = new JButton("削除");
-		DeleteButton.setBounds(87, 195, 101, 25);
+		DeleteButton = new JButton("Delete");
+		DeleteButton.setBounds(375, 400, 101, 25);
 		add(DeleteButton);
 		DeleteButton.addActionListener(new DeleteButtonListener());
 
-		BackButton = new JButton("戻る");
-		BackButton.setBounds(257, 195, 101, 25);
+		BackButton = new JButton("Back");
+		BackButton.setBounds(525, 400, 101, 25);
 		add(BackButton);
 		BackButton.addActionListener(new BackButtonListener());
 	}

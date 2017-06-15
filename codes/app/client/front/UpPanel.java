@@ -22,16 +22,16 @@ public class UpPanel extends JPanel {
 
 
 		upFiles = new ArrayList<File>();
-		UpButton = new JButton("アップロード");
-		UpButton.setBounds(64, 263, 101, 25);
+		UpButton = new JButton("Upload");
+		UpButton.setBounds(350, 575, 101, 25);
 		add(UpButton);
 		UpButton.addActionListener(new UpButtonListener());
-		BackButton = new JButton("戻る");
-		BackButton.setBounds(331, 263, 101, 25);
+		BackButton = new JButton("Back");
+		BackButton.setBounds(600, 575, 101, 25);
 		add(BackButton);
 		BackButton.addActionListener(new BackButtonListener());
 		textArea = new JTextArea();
-		textArea.setBounds(12, 13, 470, 237);
+		textArea.setBounds(10, 10, 980, 550);
 		add(textArea);
 		//ドロップ操作を有効にする
 		textArea.setTransferHandler(new DropFileHandler());

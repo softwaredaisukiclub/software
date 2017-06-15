@@ -18,12 +18,12 @@ public class DownResultPanel extends JPanel {
     if(file != null){
       label = new JLabel(file.getAbsolutePath());
     }else{
-      label = new JLabel("見つかりませんでした（笑）");
+      label = new JLabel("It wasn't found:(");
     }
     label.setBounds(20, 133, 400, 10);
     add(label);
 
-    BackButton = new JButton("戻る");
+    BackButton = new JButton("Back");
     BackButton.setBounds(151, 234, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());

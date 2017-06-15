@@ -3,11 +3,10 @@ package client.front;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Font;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
+import javax.swing.*;
 
 public class InitPanel extends JPanel {
 	private JButton ExitButton;
@@ -22,28 +21,34 @@ public class InitPanel extends JPanel {
 	public InitPanel() {
 		setLayout(null);
 
-		ExitButton = new JButton("終了");
-		ExitButton.setBounds(262, 180, 101, 25);
+		ExitButton = new JButton("Finish");
+		ExitButton.setFont(new Font("century", Font.BOLD, 16));
+		//ExitButton.setBounds(262, 180, 101, 25);
+		ExitButton.setBounds(0, 400, 300, 100);
 		add(ExitButton);
 		ExitButton.addActionListener(new ExitButtonListener());
 
-		UpButton = new JButton("アップロード");
-		UpButton.setBounds(262, 77, 101, 25);
+		UpButton = new JButton("Upload");
+		UpButton.setFont(new Font("century", Font.BOLD, 16));
+		UpButton.setBounds(0, 0, 300, 100);
 		add(UpButton);
 		UpButton.addActionListener(new UpButtonListener());
 
-		DownButton = new JButton("ダウンロード");
-		DownButton.setBounds(92, 77, 101, 25);
+		DownButton = new JButton("Download");
+		DownButton.setFont(new Font("century", Font.BOLD, 16));
+		DownButton.setBounds(0, 100, 300, 100);
 		add(DownButton);
 		DownButton.addActionListener(new DownButtonListener());
 
-		SearchButton = new JButton("検索");
-		SearchButton.setBounds(92, 180, 101, 25);
+		SearchButton = new JButton("Search");
+		SearchButton.setFont(new Font("century", Font.BOLD, 16));
+		SearchButton.setBounds(0, 200, 300, 100);
 		add(SearchButton);
 		SearchButton.addActionListener(new SearchButtonListener());
 
-		DeleteButton = new JButton("削除");
-		DeleteButton.setBounds(177, 128, 101, 25);
+		DeleteButton = new JButton("Delete");
+		DeleteButton.setFont(new Font("century", Font.BOLD, 16));
+		DeleteButton.setBounds(0, 300, 300, 100);
 		add(DeleteButton);
 		DeleteButton.addActionListener(new DeleteButtonListener());
 	}

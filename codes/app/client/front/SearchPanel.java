@@ -16,16 +16,16 @@ public class SearchPanel extends JPanel {
 	public SearchPanel() {
 		setLayout(null);
 		textField = new JTextField();
-		textField.setBounds(72, 126, 313, 22);
+		textField.setBounds(350, 300, 300, 22);
 		add(textField);
 		textField.setColumns(10);
-		SearchButton = new JButton("検索");
-		SearchButton.setBounds(97, 194, 101, 25);
+		SearchButton = new JButton("Search");
+		SearchButton.setBounds(375, 400, 101, 25);
 		add(SearchButton);
 		SearchButton.addActionListener(new SearchButtonListener());
 
-		BackButton = new JButton("戻る");
-		BackButton.setBounds(254, 194, 101, 25);
+		BackButton = new JButton("Back");
+		BackButton.setBounds(525, 400, 101, 25);
 		add(BackButton);
 		BackButton.addActionListener(new BackButtonListener());
 	}

@@ -17,18 +17,18 @@ public class DownPanel extends JPanel {
 		setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(56, 99, 334, 22);
+		textField.setBounds(350, 300, 300, 22);
 		add(textField);
 		textField.setColumns(10);
 		textField.addActionListener(new DownButtonListener());
 
-		DownButton = new JButton("ダウンロード");
-		DownButton.setBounds(87, 195, 101, 25);
+		DownButton = new JButton("Download");
+		DownButton.setBounds(375, 400, 101, 25);
 		add(DownButton);
 		DownButton.addActionListener(new DownButtonListener());
 
-		BackButton = new JButton("戻る");
-		BackButton.setBounds(257, 195, 101, 25);
+		BackButton = new JButton("Back");
+		BackButton.setBounds(525, 400, 101, 25);
 		add(BackButton);
 		BackButton.addActionListener(new BackButtonListener());
 	}

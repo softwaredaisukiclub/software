@@ -12,14 +12,14 @@ public class DeleteResultPanel extends JPanel {
   public DeleteResultPanel(boolean result) {
      setLayout(null);
     if(result){
-      label = new JLabel("削除しました");
+      label = new JLabel("It was deleted:)");
     }else{
-      label = new JLabel("削除できませんでした（笑）");
+      label = new JLabel("It couldn't be deleted:(");
     }
     label.setBounds(185, 133, 200, 24);
     add(label);
 
-    BackButton = new JButton("戻る");
+    BackButton = new JButton("Back");
     BackButton.setBounds(257, 195, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());

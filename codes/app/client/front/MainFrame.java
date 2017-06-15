@@ -44,7 +44,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("設定画面");
 		getContentPane().add(new SetupPanel());
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showInitPanel(){
@@ -53,7 +55,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("初期画面");
 		getContentPane().add(new InitPanel());
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showSearchPanel(){
@@ -62,7 +66,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("検索画面");
 		getContentPane().add(new SearchPanel());
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showDownPanel(){
@@ -70,7 +76,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("ダウンロード画面");
 		getContentPane().add(new DownPanel());
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showUpPanel(){
@@ -78,7 +86,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("アップロード画面");
 		getContentPane().add(new UpPanel());
-		setBounds(100, 100, 500, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showDeletePanel() {
@@ -86,7 +96,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("削除画面");
 		getContentPane().add(new DeletePanel());
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showUpResultPanel(boolean result){
@@ -94,7 +106,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("アップロード結果");
 		getContentPane().add(new UpResultPanel(result));
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showDownResultPanel(File resultFile){
@@ -102,7 +116,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("ダウンロード結果");
 		getContentPane().add(new DownResultPanel(resultFile));
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showSearchResultPanel(boolean result){
@@ -110,7 +126,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("検索結果");
 		getContentPane().add(new SearchResultPanel(result));
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showDeleteResultPanel(boolean result){
@@ -118,7 +136,9 @@ public class MainFrame extends JFrame {
 
 		setTitle("削除結果");
 		getContentPane().add(new DeleteResultPanel(result));
-		setBounds(100, 100, 450, 350);
+		//setBounds(100, 100, 1000, 750);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 }

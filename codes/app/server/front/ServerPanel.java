@@ -3,6 +3,7 @@ package server.front;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,25 +31,28 @@ public class ServerPanel extends JPanel {
 		setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(80, 93, 304, 22);
+		textField.setBounds(350, 250, 304, 22);
 		add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(80, 195, 304, 22);
+		textField_1.setBounds(350, 350, 304, 22);
 		add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.addActionListener(new DecisionButtonListener());
 
-		label = new JLabel("スライドにある番号を入力してください");
-		label.setBounds(80, 45, 187, 35);
+		label = new JLabel("Please input the number on the slide"); //スライドにある番号を入力してください
+		label.setBounds(338,290,800,44); //80, 45, 187, 35
+		label.setFont(new Font("Century", Font.BOLD, 16));
 		add(label);
 
-		lblD = new JLabel("自分のPCのDのとなりにある3桁の番号を入力してください");
-		lblD.setBounds(80, 143, 345, 44);
+		lblD = new JLabel("Please input 3 digits of number which is next to written D to your PC"); //自分のPCのDのとなりにある3桁の番号を入力してください
+		lblD.setBounds(215,390,800,44); //80, 143, 345, 44
+		lblD.setFont(new Font("Century", Font.BOLD, 16));
 		add(lblD);
 
-		DecisionButton = new JButton("決定");
-		DecisionButton.setBounds(166, 244, 101, 25);
+		DecisionButton = new JButton("OK"); //決定
+		DecisionButton.setBounds(450, 450, 101, 25); //166, 244, 101, 25
 		add(DecisionButton);
 		DecisionButton.addActionListener(new DecisionButtonListener());
 	}

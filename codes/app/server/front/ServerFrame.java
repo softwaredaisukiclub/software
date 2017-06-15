@@ -41,7 +41,9 @@ public class ServerFrame extends JFrame {
 
 		setTitle("サーバー");
 		getContentPane().add(new ServerPanel());
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 450, 300);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 	public void showServerResultPanel(){
@@ -50,7 +52,9 @@ public class ServerFrame extends JFrame {
 
 		setTitle("サーバー");
 		getContentPane().add(new ServerResultPanel());
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 450, 300);
+		setSize(1000, 750);
+		setLocationRelativeTo(null);
 	}
 
 

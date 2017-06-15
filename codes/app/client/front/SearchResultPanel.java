@@ -12,14 +12,14 @@ public class SearchResultPanel extends JPanel {
   public SearchResultPanel(boolean result) {
      setLayout(null);
     if(result){
-      label = new JLabel("見つかりました！");
+      label = new JLabel("It was found:)");
     }else{
-      label = new JLabel("見つかりませんでした（笑）");
+      label = new JLabel("It wasn't found");
     }
     label.setBounds(185, 133, 200, 24);
     add(label);
 
-    BackButton = new JButton("戻る");
+    BackButton = new JButton("Back");
     BackButton.setBounds(257, 195, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());
