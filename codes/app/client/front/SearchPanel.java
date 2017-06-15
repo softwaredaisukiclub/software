@@ -19,6 +19,8 @@ public class SearchPanel extends JPanel {
 		textField.setBounds(350, 300, 300, 22);
 		add(textField);
 		textField.setColumns(10);
+		textField.addActionListener(new SearchButtonListener());
+		
 		SearchButton = new JButton("Search");
 		SearchButton.setBounds(375, 400, 101, 25);
 		add(SearchButton);
