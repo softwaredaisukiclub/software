@@ -38,7 +38,7 @@ public class Client extends NetworkServer implements Runnable {
 		if(address.equals("localhost")){
 			return 50;
 		}else{
-			return Integer.parseInt(address.substring(4,7));
+			return Integer.parseInt(address.substring(5,7));
 		}
 	}
 
