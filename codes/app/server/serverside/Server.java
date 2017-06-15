@@ -15,7 +15,7 @@ public class Server extends NetworkServer {
 		if(address =="localhost"){
 			addport = 50;
 		}else{
-		addport = Integer.parseInt(address.substring(4,7));
+		addport = Integer.parseInt(address.substring(5,7));
 	}
 		File stragedir = new File(PathList.stragePath);
 		if(!stragedir.exists()){
