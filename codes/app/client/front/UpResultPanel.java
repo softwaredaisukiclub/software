@@ -15,14 +15,17 @@ public class UpResultPanel extends JPanel {
     setLayout(null);
     if(result){
       label = new JLabel("Success!");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(470, 300, 200, 24);
     }else{
       label = new JLabel("Failure");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(470, 300, 200, 24);
     }
-    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("Back");
-    BackButton.setBounds(151, 234, 101, 25);
+    BackButton.setBounds(450, 450, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());
   }

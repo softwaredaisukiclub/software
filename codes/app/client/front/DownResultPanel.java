@@ -16,15 +16,18 @@ public class DownResultPanel extends JPanel {
   public DownResultPanel(File file) {
     setLayout(null);
     if(file != null){
-      label = new JLabel(file.getAbsolutePath());
+      label = new JLabel("Success!");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(470, 300, 400, 24);
     }else{
       label = new JLabel("It wasn't found:(");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(435, 300, 400, 24);
     }
-    label.setBounds(20, 133, 400, 10);
     add(label);
 
     BackButton = new JButton("Back");
-    BackButton.setBounds(151, 234, 101, 25);
+    BackButton.setBounds(450, 450, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());
   }

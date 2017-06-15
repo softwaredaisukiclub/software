@@ -13,14 +13,17 @@ public class SearchResultPanel extends JPanel {
      setLayout(null);
     if(result){
       label = new JLabel("It was found:)");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(435, 300, 200, 24);
     }else{
       label = new JLabel("It wasn't found");
+      label.setFont(new Font("Century", Font.BOLD, 16));      
+      label.setBounds(435, 300, 200, 24);
     }
-    label.setBounds(185, 133, 200, 24);
     add(label);
 
     BackButton = new JButton("Back");
-    BackButton.setBounds(257, 195, 101, 25);
+    BackButton.setBounds(450, 450, 101, 25);
     add(BackButton);
     BackButton.addActionListener(new BackButtonListener());
   }
