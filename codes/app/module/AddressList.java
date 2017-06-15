@@ -4,6 +4,7 @@ public class AddressList {
   private static int host = 49;
   private static ArrayList<String> servers = new ArrayList<String>();
   private static final String list[] = {
+    "TW63C00D",
     "W63C001D",
     "W63C002D",
     "W63C003D",
@@ -57,7 +58,7 @@ public class AddressList {
 };
 
 public static String getList(int num) {
-  return list[num-1];
+  return list[num];
 }
 
 public static void setupServerList() {
