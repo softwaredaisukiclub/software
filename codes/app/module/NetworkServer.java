@@ -36,7 +36,7 @@ public class NetworkServer {
 		try{
 			// ソケットの準備
 			if(data.equals("test")){
-				socket.connect(new InetSocketAddress(host, PORT+num), 100);
+				socket.connect(new InetSocketAddress(host, PORT+num), 200);
 			} else {
 				socket = new Socket(host, PORT+num);
 			}
@@ -59,7 +59,7 @@ public class NetworkServer {
 		String str= null;
 		try {
 			ServerSocket s = new ServerSocket(PORT+num);
-			s.setSoTimeout(1000*timeout);
+			s.setSoTimeout(3000*timeout);
 			socket = s.accept();	// コネクション設定要求を待つ
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));	// データ受信用バッファの設定

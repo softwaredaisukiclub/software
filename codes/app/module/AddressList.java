@@ -1,7 +1,7 @@
 package module;
 import java.util.*;
 public class AddressList {
-  private static int host = 49;
+  private static int host = 60;
   private static ArrayList<String> servers = new ArrayList<String>();
   private static final String list[] = {
     "TW63C00D",
@@ -63,7 +63,7 @@ public static String getList(int num) {
 
 public static void setupServerList() {
   NetworkServer s = new NetworkServer(getHost(),getServerList());
-  for(String hostname : list)            s.sendString("test",hostname,0);
+  for(String hostname : list){            s.sendString("test",hostname,0);}
   for(String name     : getServerList()) System.out.println(name);
 
 }
